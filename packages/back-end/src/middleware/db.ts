@@ -17,6 +17,7 @@ let didVerifySqlz = false;
  *   // #authenticate completes, so we know it's ready for consumption.
  * });
  */
+
 export function attachSequelize(req, res, next) {
   verifySqlzMaybe()
     .then(sequelize => {

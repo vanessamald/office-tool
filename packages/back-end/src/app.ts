@@ -12,6 +12,9 @@ const appCfg = {
 
 const app = express();
 
+// enable JSON body parsing
+app.use(express.json());
+
 // Attach any middleware
 app.use(Cors);
 app.use(attachSequelize);
