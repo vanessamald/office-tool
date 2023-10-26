@@ -168,7 +168,6 @@ const UsersRouter: IRoute = {
           })
         })
     })
-
     return router;
   },
 };

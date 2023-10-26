@@ -41,14 +41,36 @@ export default function Home() {
           User Management
         </h1>
         <div className='p-4'>
-          <p className='text-neutral-500'>Hello, world.</p>
           {/* Display ALL USERS, if no users send message 'No users available' */}
           {users.length > 0 ? (
-            <ul>
+            <table className='table-auto'>
+              <thead>
+                  <tr>
+                    <th>User Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
               {users.map((user)=> (
-                <li key={user.id}>{user.firstName} {user.lastName}</li>
+                <tbody key={user.id}>
+                  <tr>
+                    <td>{user.firstName}</td>
+                    <td>{user.lastName}</td>
+                    <td>{user.email}</td>
+                    <td>
+                      <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                        Delete
+                      </button>
+                    </td>
+                    <td>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                        Edit
+                    </button>
+                    </td>
+                  </tr>
+                </tbody>
                 ))}
-            </ul>
+            </table>
             ) : (
             <p>No users available.</p>
             )}
