@@ -134,6 +134,13 @@ const UsersRouter: IRoute = {
           data: user
         })
       })
+      .catch(err => {
+        console.error('Failed to find user', err);
+        res.status(500).json({
+          success: false, 
+          message: 'Failed to find user'
+        })
+      })
     })
     return router;
   },
