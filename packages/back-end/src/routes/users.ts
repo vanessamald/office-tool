@@ -151,6 +151,24 @@ const UsersRouter: IRoute = {
         })
       }
     })
+
+    router.route('/sort')
+    // sort table by column 
+    .get(async (req, res)=> {
+        return await User.findAll({
+          order: [
+            ['lastName', 'ASC']
+          ]
+        })
+        .then(users => {
+          res.json({
+            success: true,
+            message: '',
+            data: users
+          })
+        })
+    })
+
     return router;
   },
 };
