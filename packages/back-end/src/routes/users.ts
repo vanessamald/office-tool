@@ -56,6 +56,7 @@ const UsersRouter: IRoute = {
         });
       } 
     })
+
     router.route('/update/:id')
     // update a user
     .put(async (req, res)=> {
@@ -91,6 +92,48 @@ const UsersRouter: IRoute = {
         } catch (error) {
           console.error('Failed to update user', error);
         }
+    })
+
+    router.route('/delete/:id')
+    // delete user
+    .delete(async (req, res)=> {
+      const { id } = req.params;
+    
+      try {
+        //find user by id and delete
+        const user = await User.destroy({
+            where: { id },
+        })
+        // if user not found return error
+        if (!user) {
+          return res.status(404).json({ 
+            success: false,
+            message: 'User not found in the database'
+          })
+        }
+        // success message
+        return res.status(201).json({
+          success: true,
+          message: 'User deleted successfully',
+        });
+      } catch (error) {
+        console.error('Failed to delete user', error);
+      }
+    })
+
+    router.route('/find')
+    // find user by name and email
+    .get(async(req, res)=> {
+      const { firstName, lastName, email } = req.body;
+      return User.findOne({
+        where: { firstName, lastName, email }
+      })
+      .then(user => {
+        return res.json({
+          success: true,
+          data: user
+        })
+      })
     })
     return router;
   },
