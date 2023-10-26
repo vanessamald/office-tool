@@ -125,22 +125,31 @@ const UsersRouter: IRoute = {
     // find user by name and email
     .get(async(req, res)=> {
       const { firstName, lastName, email } = req.body;
-      return User.findOne({
-        where: { firstName, lastName, email }
-      })
-      .then(user => {
-        return res.json({
-          success: true,
-          data: user
+
+      try {
+        const user = await User.findOne({
+          where: { firstName, lastName, email }
         })
-      })
-      .catch(err => {
-        console.error('Failed to find user', err);
-        res.status(500).json({
-          success: false, 
+        // if user not found send error message
+        if (!user) {
+          return res.status(404).json({
+            success: false,
+            message: 'User not found'
+          })
+        }
+        // success message
+        return res.status(201).json({
+          success: true,
+          message: 'User successfully found',
+          data: user
+        });
+      } catch (error) {
+        console.error('Failed to find user', error);
+        return res.status(500).json({
+          success: false,
           message: 'Failed to find user'
         })
-      })
+      }
     })
     return router;
   },
