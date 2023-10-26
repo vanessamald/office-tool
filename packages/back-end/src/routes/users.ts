@@ -56,6 +56,42 @@ const UsersRouter: IRoute = {
         });
       } 
     })
+    router.route('/update/:id')
+    // update a user
+    .put(async (req, res)=> {
+        const { id } = req.params;
+        const { firstName, middleName, lastName, email, phoneNumber, address, adminNotes } = req.body;
+      
+        try {
+          // find user by id
+          const user = await User.findOne({
+            where: { id },
+          })
+          if (!user) {
+            return res.status(404).json({ 
+              success: false,
+              message: 'User not found in the database'
+            })
+          }
+
+          const updateUser = await user.update({
+            firstName,
+            middleName,
+            lastName,
+            email,
+            phoneNumber,
+            address,
+            adminNotes,
+          })
+          return res.json({
+            success: true,
+            data: updateUser,
+            message: 'User updated successfully'
+          })
+        } catch (error) {
+          console.error('Failed to update user', error);
+        }
+    })
     return router;
   },
 };
