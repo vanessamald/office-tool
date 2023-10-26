@@ -4,7 +4,7 @@ import { Inter } from '@next/font/google';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Navigation from '../components/Navigation';
-import SearchBar from '../components/SearchBar';
+import SearchBar from './search';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +22,7 @@ export default function Home() {
           User Management
         </h1>
         <div>
-          <SearchBar/>
+        <SearchBar />
         </div>
         <div className='p-4'>
           <Navigation/>

@@ -1,32 +1,28 @@
 import clsx from 'clsx';
 import { useState, useEffect } from 'react';
+import SearchBar from './search';
+import { fetchUserData } from '../utilities/api.js';
 
 export default function AllUsers() {
-    // fetch user data
-    const [ users, setUsers ] = useState([]);
-
-    useEffect(() => {
-        async function fetchUserData() {
-        try {
-            const response = await fetch('http://localhost:50000/users')
-            if (response.ok) {
-            const results = await response.json();
-            setUsers(results.data);
-            } else {
-                console.error('Error fetching data:', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }
-    fetchUserData();
-  }, []);
     
-  return (
-    <>
-        <div className='p-4'>
-          {/* Display ALL USERS, if no users send message 'No users available' */}
-          {users.length > 0 ? (
+    const [ users, setUsers ] = useState([]);
+    const [searchUser, setSearchUser] = useState('');
+
+    // fetch user data from utilities 
+    useEffect(() => {
+        async function fetchData() {
+            const data = await fetchUserData();
+            setUsers(data);
+        }
+        fetchData();
+    }, []);
+
+
+    return (
+        <>
+            <div className='p-4'>
+            {/* Display ALL USERS, if no users send message 'No users available' */}
+            {users.length > 0 ? (
             <table className='table-auto'>
                 <thead>
                     <tr>

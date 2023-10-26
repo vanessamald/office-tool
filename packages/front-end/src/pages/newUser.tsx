@@ -79,9 +79,15 @@ export default function AddNewUser () {
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                             id="adminNotes" 
                             type="text" 
-                            placeholder="adminNotes"
+                            placeholder="Notes"
                         />
                     </div>
+                    <button
+                        type="button"
+                        className="px-4 py-2 font-medium text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+                    >
+                        Submit
+                    </button>
                 </form>
             </div>
         </>
