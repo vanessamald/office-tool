@@ -4,6 +4,7 @@ import { Inter } from '@next/font/google';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Navigation from '../components/Navigation';
+import SearchBar from '../components/SearchBar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,6 +21,9 @@ export default function Home() {
         <h1 className='border-b border-neutral-300 px-4 py-2 text-2xl font-medium text-center'>
           User Management
         </h1>
+        <div>
+          <SearchBar/>
+        </div>
         <div className='p-4'>
           <Navigation/>
         </div>
