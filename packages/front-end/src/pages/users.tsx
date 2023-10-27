@@ -17,6 +17,27 @@ export default function AllUsers() {
         fetchData();
     }, []);
 
+    const  handleDelete = async (id) => {
+        console.log('DELETE', id)
+        const response = await fetch(`http://localhost:50000/users/delete/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+            }
+        });
+    }
+
+    /*
+    const handleEdit = async (id) => {
+        const response = await fetch(`http://localhost:50000/users/update/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+            },
+            body: JSON.stringify(newUserInfo)
+        })
+    }
+    */
 
     return (
         <>
@@ -38,7 +59,7 @@ export default function AllUsers() {
                         <td>{user.lastName}</td>
                         <td>{user.email}</td>
                         <td>
-                            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                            <button onClick={() => handleDelete(user.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
                                 Delete
                             </button>
                         </td>

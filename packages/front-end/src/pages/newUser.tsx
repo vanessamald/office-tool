@@ -16,7 +16,7 @@ export default function AddNewUser () {
         e.target.reset();
 
         // form info
-        let formInfo = {
+        const formInfo = {
             firstName: firstName,
             middleName: middleName,
             lastName: lastName,
@@ -29,7 +29,7 @@ export default function AddNewUser () {
         console.log(JSON.stringify(formInfo));
 
         
-        let response = await fetch('http://localhost:50000/users/create', {
+        const response = await fetch('http://localhost:50000/users/create', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
