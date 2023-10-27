@@ -2,48 +2,55 @@ import clsx from 'clsx';
 import React, { useState, useEffect } from 'react';
 
 export default function AddNewUser () {
-    const [ firstName, setFirstName ] = useState('');
-    const [ middleName, setMiddleName ] = useState('');
-    const [ lastName, setLastName ] = useState('');
-    const [ email, setEmail ] = useState('');
-    const [ phoneNumber, setPhoneNumber ] = useState('');
-    const [ address, setAddress ] = useState('');
-    const [ adminNotes, setAdminNotes ] = useState('');
+    // status and error message 
+    const [ status, setStatus ] = useState('');
+    const [ errorMessage, setErrorMessage ] = useState('');
 
-    const submitForm = async (e) => {
-        e.preventDefault();
+    // user form
+    const [ form, setForm ] = useState({
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        address: '',
+        adminNotes: ''
+    })
+    
+    // handle submit form
+    const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
+        // prevent page from reloading
+        event.preventDefault();
         // reset form
-        e.target.reset();
+        //event.target.reset();
 
-        // form info
-        const formInfo = {
-            firstName: firstName,
-            middleName: middleName,
-            lastName: lastName,
-            email: email,
-            phoneNumber: phoneNumber,
-            address: address,
-            adminNotes: adminNotes
-            } 
-
-        console.log(JSON.stringify(formInfo));
-
-        
         const response = await fetch('http://localhost:50000/users/create', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
             },
-            body: JSON.stringify(formInfo),
+            body: JSON.stringify(form),
         });
-        // if response ok set status 
+        // if response ok set response
         if (response.ok) {
         const data = await response.json();
-        //setStatus(''); 
+        console.log(data);
+        setStatus(data.message); 
         } else {
-            // set error message 
-            //setErrorMessage( 'Error occurred during registration');
+            // set error response
+            const errorData = await response.json();
+            console.error('Error occurred:', errorData);
+            setErrorMessage(errorData.message);
         }
+    }
+    
+    // handle onChange event
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({
+            ...form,
+            [event.target.id]: event.target.value
+        })
+        console.log(form);
     }
 
     return (
@@ -59,7 +66,9 @@ export default function AddNewUser () {
                             id="firstName" 
                             type="text" 
                             placeholder="First Name"
-                            onChange={(e) => setFirstName(e.target.value)}
+                            name="firstName"
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -71,7 +80,7 @@ export default function AddNewUser () {
                             id="middleName" 
                             type="text" 
                             placeholder="Middle Name"
-                            onChange={(e) => setMiddleName(e.target.value)}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="mb-4">
@@ -83,7 +92,8 @@ export default function AddNewUser () {
                             id="lastName" 
                             type="text" 
                             placeholder="Last Name"
-                            onChange={(e) => setLastName(e.target.value)}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -95,7 +105,8 @@ export default function AddNewUser () {
                             id="email" 
                             type="text" 
                             placeholder="Email"
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -107,7 +118,7 @@ export default function AddNewUser () {
                             id="phoneNumber" 
                             type="text" 
                             placeholder="Phone Number"
-                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="mb-4">
@@ -119,7 +130,7 @@ export default function AddNewUser () {
                             id="address" 
                             type="text" 
                             placeholder="address"
-                            onChange={(e) => setAddress(e.target.value)}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="mb-4">
@@ -131,7 +142,9 @@ export default function AddNewUser () {
                             id="adminNotes" 
                             type="text" 
                             placeholder="Notes"
-                            onChange={(e) => setAdminNotes(e.target.value)}
+                            value={form.adminNotes}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <button
@@ -141,6 +154,11 @@ export default function AddNewUser () {
                         Submit
                     </button>
                 </form>
+                <div>
+                    { errorMessage ? 
+                    <p className='font-medium text-red-500'>{errorMessage}</p>
+                    : '' }
+                </div>
             </div>
         </>
     )
