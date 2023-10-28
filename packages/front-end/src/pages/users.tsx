@@ -2,11 +2,17 @@ import clsx from 'clsx';
 import { useState, useEffect } from 'react';
 import SearchBar from './search';
 import { fetchUserData } from '../utilities/api.js';
+import EditForm from '../components/EditForm';
+
 
 export default function AllUsers() {
-    
+    // all users
     const [ users, setUsers ] = useState([]);
     const [searchUser, setSearchUser] = useState('');
+    // open/close modal
+    const [showModal, setShowModal] = useState(false);
+    // selected user to edit
+    const [ selectedUser, setSelectedUser ] = useState(null);
 
     // fetch user data from utilities 
     useEffect(() => {
@@ -17,7 +23,8 @@ export default function AllUsers() {
         fetchData();
     }, []);
 
-    const  handleDelete = async (id) => {
+    // handle deleting a user
+    const  handleDelete = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
         console.log('DELETE', id)
         const response = await fetch(`http://localhost:50000/users/delete/${id}`, {
             method: "DELETE",
@@ -25,20 +32,22 @@ export default function AllUsers() {
                 "Content-Type": "application/json;charset=utf-8",
             }
         });
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+        }
     }
 
-    /*
-    const handleEdit = async (id) => {
-        const response = await fetch(`http://localhost:50000/users/update/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify(newUserInfo)
-        })
+    // handle edit form
+    const handleEdit = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
+        // Find the user with the given ID
+        const userToEdit = users.find((user) => user.id === id);
+        if (userToEdit) {
+            setSelectedUser(userToEdit);
+            setShowModal(true);
+        }
     }
-    */
-
+    
     return (
         <>
             <div className='p-4'>
@@ -59,12 +68,18 @@ export default function AllUsers() {
                         <td>{user.lastName}</td>
                         <td>{user.email}</td>
                         <td>
-                            <button onClick={() => handleDelete(user.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                            <button 
+                                onClick={(event) => handleDelete(event, user.id)} 
+                                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+                            >
                                 Delete
                             </button>
                         </td>
                         <td>
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                            <button 
+                                onClick={(event) => handleEdit(event, user.id)}
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                            >
                                 Edit
                             </button>
                         </td>
@@ -75,6 +90,7 @@ export default function AllUsers() {
             ) : (
             <p>No users available.</p>
             )}
+             {showModal ? ( <EditForm user={selectedUser} onClose={() => setShowModal(false)} />  ) : null}
         </div>
     </>
   )
