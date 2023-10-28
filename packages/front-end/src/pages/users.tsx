@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useState, useEffect } from 'react';
 import SearchBar from './search';
 import { fetchUserData } from '../utilities/api.js';
-import EditForm from '../components/EditForm';
+import EditForm from '../components/editUser';
 
 
 export default function AllUsers() {
