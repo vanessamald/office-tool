@@ -22,7 +22,7 @@ export default function Home() {
           User Management
         </h1>
         <div>
-        <SearchBar />
+          <SearchBar/>
         </div>
         <div className='p-4'>
           <Navigation/>

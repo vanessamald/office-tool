@@ -68,7 +68,7 @@ export default function AllUsers({  }) {
     };
 
     // handle sorting by name 
-    const handleSortingByName = () => {
+    const handleSortingByFirstName = () => {
         // make a copy of the users array
         const sortedUsers = [...users];
         // sort users by first name
@@ -78,9 +78,20 @@ export default function AllUsers({  }) {
             }
             if (a.firstName > b.firstName) {
                 return 1
-            }
-            // sort users by last name
-            if (a.lastName > b.lastName) {
+            } else {
+                return 0;
+            } 
+        })
+        // update the user array
+        setUsers(sortedUsers);
+        console.log(sortedUsers);
+    }
+
+    const handleSortingByLastName = () => {
+        const sortedUsers = [...users];
+        sortedUsers.sort((a, b) => {
+             // sort users by last name
+             if (a.lastName > b.lastName) {
                 return 1;
             } else if (a.lastName < b.lastName) {
                 return -1;
@@ -88,30 +99,42 @@ export default function AllUsers({  }) {
                 return 0;
             }  
         })
-            // update the user array
-            setUsers(sortedUsers);
-            console.log(sortedUsers);
+        setUsers(sortedUsers)
     }
 
     const handleSortingByEmail = () => {
         console.log('Sorting by Email')
+        const sortedUserByEmail = [...users];
+        sortedUserByEmail.sort((a, b) => {
+            if (a.email < b.email) {
+                return -1
+            }
+            if (a.email < b.email) {
+                return 1
+            }  
+        })
+        // update the user array
+        setUsers(sortedUserByEmail);
     }
 
     return (
         <>
-            <div className='p-4'>
+            <div className='p-4 overflow-x-auto'>
             {/* Display ALL USERS, if no users send message 'No users available' */}
             {users.length > 0 ? (
-            <table className='table-auto'>
+            <table className='table-auto w-full'>
                 <thead>
-                    <tr>
-                        <th>
+                    <tr className='border-t'>
+                        <th className='p-2 text-left'>
                             <button onClick={handleSortingById}>User Id</button>
                         </th>
-                        <th>
-                            <button onClick={handleSortingByName}>Name</button>
+                        <th className='p-2 text-left'>
+                            <button onClick={handleSortingByFirstName}>First Name</button>
                         </th>
-                        <th>
+                        <th className='p-2 text-left'>
+                            <button onClick={handleSortingByLastName}>Last Name</button>
+                        </th>
+                        <th className='p-2 text-left'>
                             <button onClick={handleSortingByEmail}>Email</button>
                         </th>
                     </tr>
@@ -119,9 +142,11 @@ export default function AllUsers({  }) {
                 {users.map((user)=> (
                 <tbody key={user.id}>
                     <tr>
-                        <td>{user.firstName}</td>
-                        <td>{user.lastName}</td>
-                        <td>{user.email}</td>
+                        <td className='p-2'>{user.id}</td>
+                        <td className='p-2'>{user.firstName}</td>
+                        <td className='p-2'>{user.lastName}</td>
+                        <td className='p-2'>{user.email}</td>
+                        <div className='flex space-x-2'>
                         <td>
                             <button 
                                 onClick={(event) => handleDelete(event, user.id)} 
@@ -138,6 +163,8 @@ export default function AllUsers({  }) {
                                 Edit
                             </button>
                         </td>
+                        </div>
+                        
                     </tr>
                 </tbody>
                 ))}
