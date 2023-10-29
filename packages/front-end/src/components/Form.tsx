@@ -1,8 +1,13 @@
-export default function Form ({handleChange, submitForm, user}) {
+import React, { useState } from 'react';
+
+export default function Form ({ handleClose, handleChange, submitForm, user }) {
+
     return (
         <>
+            
             <div>
-            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={submitForm}>
+            
+            <form className="bg-white rounded px-8 pt-6 pb-8 mb-4" onSubmit={submitForm}>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
                             First Name
@@ -105,8 +110,17 @@ export default function Form ({handleChange, submitForm, user}) {
                     >
                         Submit
                     </button>
+                    <button
+                        className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                        type="button"
+                        onClick={handleClose}
+                    >
+                        Cancel
+                    </button>
                 </form>
+            
             </div>
+            
         </>
     )
 }

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import Form from './Form';
 
-export default function EditForm ({user, onClose})  {
+export default function EditForm ({ handleClose, user })  {
   // status and error message 
   const [ status, setStatus ] = useState('');
   const [ errorMessage, setErrorMessage ] = useState('');
@@ -52,20 +52,21 @@ export default function EditForm ({user, onClose})  {
         setErrorMessage(errorData.message);
         }
     }
+
   
   return (
         <>
-          <div className='absolute'>
-            <div className="relative p-6 flex-auto">
-              <Form handleChange={handleChange} submitForm={submitForm} user={user}/>
-            </div>
-              <button
+          <div className='fixed inset-0 flex items-center justify-center z-50'>
+            <div className="bg-white p-8 w-full h-full ">
+              <Form handleClose={handleClose} handleChange={handleChange} submitForm={submitForm} user={user}/>
+              {/*<button
                 className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
                 type="button"
-                onClick={onClose}
+                onClick={handleClose}
               >
                 Close
-              </button>
+              </button>*/}
+            </div> 
           </div>
         </>
     )

@@ -5,7 +5,7 @@ import { fetchUserData } from '../utilities/api.js';
 import EditForm from '../components/editUser';
 
 
-export default function AllUsers() {
+export default function AllUsers({  }) {
     // all users
     const [ users, setUsers ] = useState([]);
     const [searchUser, setSearchUser] = useState('');
@@ -47,6 +47,13 @@ export default function AllUsers() {
             setShowModal(true);
         }
     }
+
+    
+    // handle closing edit form
+    const handleClose = async (event: React.MouseEvent<HTMLButtonElement>) => {
+        setShowModal(false);
+    }
+
     
     return (
         <>
@@ -90,8 +97,10 @@ export default function AllUsers() {
             ) : (
             <p>No users available.</p>
             )}
-             {showModal ? ( <EditForm user={selectedUser} onClose={() => setShowModal(false)} />  ) : null}
+            {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null}
         </div>
     </>
   )
 }
+
+//onClose={() => setShowModal(false)}

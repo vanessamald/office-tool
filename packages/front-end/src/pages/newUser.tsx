@@ -1,8 +1,12 @@
 import clsx from 'clsx';
 import React, { useState, useEffect } from 'react';
 import Form from '../components/Form';
+import { useRouter } from 'next/router';
 
 export default function AddNewUser () {
+    // open/close modal
+    const [showModal, setShowModal] = useState(true);
+    
     // status and error message 
     const [ status, setStatus ] = useState('');
     const [ errorMessage, setErrorMessage ] = useState('');
@@ -54,16 +58,25 @@ export default function AddNewUser () {
         console.log(form);
     }
 
+    // take user back to home page when add new user page is closed 
+    const router = useRouter();
+    const handleClose = async (event: React.MouseEvent<HTMLButtonElement>) => {
+        setShowModal(false);
+        router.push('/');
+    }
+
     return (
-        <>
+        <> {/*
             <div className="w-full max-w-xs">
-                <Form handleChange={handleChange}  submitForm={submitForm} user=''/>    
+                <Form handleClose={handleClose} handleChange={handleChange} submitForm={submitForm} user=''/>   
                 <div>
                     { errorMessage ? 
                     <p className='font-medium text-red-500'>{errorMessage}</p>
                     : '' }
                 </div>
             </div>
+                    */}
+            {showModal ? ( <Form handleChange={handleChange} submitForm={submitForm} user='' handleClose={handleClose} />  ) : null}
         </>
     )
 }
