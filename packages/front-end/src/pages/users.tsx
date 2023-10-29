@@ -53,6 +53,49 @@ export default function AllUsers({  }) {
     const handleClose = async (event: React.MouseEvent<HTMLButtonElement>) => {
         setShowModal(false);
     }
+    
+    // handle sorting by id 
+    const handleSortingById = () => {
+        console.log('BUTTON CLICKED')
+        // copy of the users array
+        const sortedUsersById = [...users];
+        // sort users by id
+        sortedUsersById.sort((a, b)=>  a.id - b.id)
+
+        // update the user array
+        setUsers(sortedUsersById);
+        console.log(sortedUsersById)
+    };
+
+    // handle sorting by name 
+    const handleSortingByName = () => {
+        // make a copy of the users array
+        const sortedUsers = [...users];
+        // sort users by first name
+        sortedUsers.sort((a, b)=> {
+            if (a.firstName < b.firstName ) {
+                return -1
+            }
+            if (a.firstName > b.firstName) {
+                return 1
+            }
+            // sort users by last name
+            if (a.lastName > b.lastName) {
+                return 1;
+            } else if (a.lastName < b.lastName) {
+                return -1;
+            } else {
+                return 0;
+            }  
+        })
+            // update the user array
+            setUsers(sortedUsers);
+            console.log(sortedUsers);
+    }
+
+    const handleSortingByEmail = () => {
+        console.log('Sorting by Email')
+    }
 
     return (
         <>
@@ -62,9 +105,15 @@ export default function AllUsers({  }) {
             <table className='table-auto'>
                 <thead>
                     <tr>
-                        <th>User Id</th>
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th>
+                            <button onClick={handleSortingById}>User Id</button>
+                        </th>
+                        <th>
+                            <button onClick={handleSortingByName}>Name</button>
+                        </th>
+                        <th>
+                            <button onClick={handleSortingByEmail}>Email</button>
+                        </th>
                     </tr>
                 </thead>
                 {users.map((user)=> (
@@ -101,5 +150,4 @@ export default function AllUsers({  }) {
     </>
   )
 }
-
 //onClose={() => setShowModal(false)}
