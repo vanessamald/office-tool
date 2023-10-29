@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import React, { useState, useEffect } from 'react';
 import { fetchUserData } from '../utilities/api.js';
+import DisplayUsers from '../components/DisplayUsers';
 
 export default function SearchBar () {
     const [ users, setUsers ] = useState([]);
@@ -23,7 +24,6 @@ export default function SearchBar () {
         // split search parameters 
         const splitSearchUser = searchUser.toLowerCase().split(' ');
         
-
         const filtered = users.filter((user)=> {
             // variable to track if search values match a user
             let userSearch = true;
@@ -73,15 +73,18 @@ export default function SearchBar () {
                 </div>
             </form>
             <div>
-                <ul>
+                
                 {filteredUsers.length > 0
                     ? filteredUsers.map((user) => (
-                        <li key={user.id}>{user.firstName} {user.lastName}</li>
+                        <p key={user.id}>{user.firstName} {user.lastName}</p>
+                        
                     ))
-                    : <li>No users found.</li>}
-                </ul>
+                    : 'No users found' }
+                
             </div>
         </div>
         </>
     )
 }
+
+{/*<DisplayUsers user={user}/>*/}

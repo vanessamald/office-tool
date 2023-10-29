@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import SearchBar from './search';
 import { fetchUserData } from '../utilities/api.js';
 import EditForm from '../components/editUser';
+import DisplayUsers from '../components/DisplayUsers';
 
 export default function AllUsers({  }) {
     // all users
@@ -25,7 +26,7 @@ export default function AllUsers({  }) {
     }, []);
 
     // handle deleting a user
-    const  handleDelete = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
+    const handleDelete = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
         console.log('DELETE', id)
         const response = await fetch(`http://localhost:50000/users/delete/${id}`, {
             method: "DELETE",
@@ -87,6 +88,7 @@ export default function AllUsers({  }) {
         console.log(sortedUsers);
     }
 
+    // sort users by last name
     const handleSortingByLastName = () => {
         const sortedUsers = [...users];
         sortedUsers.sort((a, b) => {
@@ -102,6 +104,7 @@ export default function AllUsers({  }) {
         setUsers(sortedUsers)
     }
 
+    // sort users by email
     const handleSortingByEmail = () => {
         console.log('Sorting by Email')
         const sortedUserByEmail = [...users];
@@ -119,9 +122,7 @@ export default function AllUsers({  }) {
 
     return (
         <>
-            <div className='p-4 overflow-x-auto'>
-            {/* Display ALL USERS, if no users send message 'No users available' */}
-            {users.length > 0 ? (
+        <div className='p-4 overflow-x-auto'>
             <table className='table-auto w-full'>
                 <thead>
                     <tr className='border-t'>
@@ -140,41 +141,67 @@ export default function AllUsers({  }) {
                     </tr>
                 </thead>
                 {users.map((user)=> (
-                <tbody key={user.id}>
-                    <tr>
-                        <td className='p-2'>{user.id}</td>
-                        <td className='p-2'>{user.firstName}</td>
-                        <td className='p-2'>{user.lastName}</td>
-                        <td className='p-2'>{user.email}</td>
-                        <div className='flex space-x-2'>
-                        <td>
-                            <button 
-                                onClick={(event) => handleDelete(event, user.id)} 
-                                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-                            >
-                                Delete
-                            </button>
-                        </td>
-                        <td>
-                            <button 
-                                onClick={(event) => handleEdit(event, user.id)}
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                            >
-                                Edit
-                            </button>
-                        </td>
-                        </div>
-                        
-                    </tr>
-                </tbody>
+                    <DisplayUsers user={user} key={user.id} handleDelete={handleDelete} handleEdit={handleEdit}/>
                 ))}
             </table>
-            ) : (
-            <p>No users available.</p>
-            )}
             {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null}
         </div>
     </>
   )
 }
 //onClose={() => setShowModal(false)}
+
+
+{/*  Display all users
+
+            {users.length > 0 ? (
+                <table className='table-auto w-full'>
+                    <thead>
+                        <tr className='border-t'>
+                            <th className='p-2 text-left'>
+                                <button onClick={handleSortingById}>User Id</button>
+                            </th>
+                            <th className='p-2 text-left'>
+                                <button onClick={handleSortingByFirstName}>First Name</button>
+                            </th>
+                            <th className='p-2 text-left'>
+                                <button onClick={handleSortingByLastName}>Last Name</button>
+                            </th>
+                            <th className='p-2 text-left'>
+                                <button onClick={handleSortingByEmail}>Email</button>
+                            </th>
+                        </tr>
+                    </thead>
+                    {users.map((user)=> (
+                    <tbody key={user.id}>
+                        <tr>
+                            <td className='p-2'>{user.id}</td>
+                            <td className='p-2'>{user.firstName}</td>
+                            <td className='p-2'>{user.lastName}</td>
+                            <td className='p-2'>{user.email}</td>
+                            <div className='flex space-x-2'>
+                            <td>
+                                <button 
+                                    onClick={(event) => handleDelete(event, user.id)} 
+                                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+                                >
+                                    Delete
+                                </button>
+                            </td>
+                            <td>
+                                <button 
+                                    onClick={(event) => handleEdit(event, user.id)}
+                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                                >
+                                    Edit
+                                </button>
+                            </td>
+                            </div>  
+                        </tr>
+                    </tbody>
+                    ))}
+                </table> 
+                ) : (
+                <p>No users available.</p>
+                )}
+                */}
