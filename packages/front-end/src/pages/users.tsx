@@ -4,13 +4,14 @@ import SearchBar from './search';
 import { fetchUserData } from '../utilities/api.js';
 import EditForm from '../components/editUser';
 
-
 export default function AllUsers({  }) {
     // all users
     const [ users, setUsers ] = useState([]);
     const [searchUser, setSearchUser] = useState('');
+
     // open/close modal
     const [showModal, setShowModal] = useState(false);
+
     // selected user to edit
     const [ selectedUser, setSelectedUser ] = useState(null);
 
@@ -48,13 +49,11 @@ export default function AllUsers({  }) {
         }
     }
 
-    
     // handle closing edit form
     const handleClose = async (event: React.MouseEvent<HTMLButtonElement>) => {
         setShowModal(false);
     }
 
-    
     return (
         <>
             <div className='p-4'>

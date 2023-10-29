@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 
 export default function Form ({ handleClose, handleChange, submitForm, user }) {
-
     return (
-        <>
-            
-            <div>
-            
+        <> 
+        <div>
             <form className="bg-white rounded px-8 pt-6 pb-8 mb-4" onSubmit={submitForm}>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
@@ -118,9 +115,7 @@ export default function Form ({ handleClose, handleChange, submitForm, user }) {
                         Cancel
                     </button>
                 </form>
-            
-            </div>
-            
+            </div>  
         </>
     )
 }

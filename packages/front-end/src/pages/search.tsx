@@ -18,10 +18,32 @@ export default function SearchBar () {
 
     // filter users by search parameters
     const handleSearch = async () => {
+        console.log(searchUser);
+
+        // split search parameters 
+        const splitSearchUser = searchUser.toLowerCase().split(' ');
+        
+
         const filtered = users.filter((user)=> {
-            return user.firstName.toLowerCase().includes(searchUser.toLowerCase());
+            // variable to track if search values match a user
+            let userSearch = true;
+            
+            // loop through each search parameter and find matches
+            splitSearchUser.forEach((searchParam) => {
+                const firstNameSearch = user.firstName.toLowerCase().includes(searchParam);
+                const emailSearch = user.email.toLowerCase().includes(searchParam);
+                const lastName = user.lastName.toLowerCase().includes(searchParam);
+                
+                // if search params return no matches set to false
+                if (!firstNameSearch && !emailSearch && !lastName) {
+                    userSearch = false;
+                }
+            })
+            // return true if any search params matches
+            return userSearch;
         })
         setFilteredUsers(filtered);
+        console.log(filtered);
     }
 
     return (
