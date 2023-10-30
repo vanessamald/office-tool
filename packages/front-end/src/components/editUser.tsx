@@ -7,6 +7,7 @@ export default function EditForm ({ handleClose, user })  {
   const [ status, setStatus ] = useState('');
   const [ errorMessage, setErrorMessage ] = useState('');
 
+  
   const [ editedUser, setEditedUser ] = useState({
     firstName: '',
     middleName: '',
@@ -16,18 +17,50 @@ export default function EditForm ({ handleClose, user })  {
     address: '',
     adminNotes: ''
   });
+  
+console.log(user);
+  
+/*
+  const [editedUser, setEditedUser] = useState({
+    firstName: user.firstName,
+    middleName: user.middleName,
+    lastName: user.lastName,
+    email: user.email,
+    phoneNumber: user.phoneNumber,
+    address: user.address,
+    adminNotes: user.adminNotes,
+  });
+  */
 
+  /*
+  const [ editedUser, setEditedUser ] = useState({
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    address: '',
+    adminNotes: ''
+  });
+  */
+  //const [ editedUser, setEditedUser ] = useState();
+
+  /*
   // handle onChange event
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEditedUser({
       ...editedUser,
       [event.target.id]: event.target.value
     })
-    console.log(editedUser);
+    //console.log(editedUser);
   }
+  */
+
+  
+
 
   // handle submit form
-  const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = async (values) => {
     
     // prevent page from reloading
     //event.preventDefault();
@@ -36,7 +69,7 @@ export default function EditForm ({ handleClose, user })  {
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
-      body: JSON.stringify(editedUser),
+      body: JSON.stringify(values),
   });
       // if response ok set response
       if (response.ok) {
@@ -67,13 +100,57 @@ export default function EditForm ({ handleClose, user })  {
       adminNotes: ''
     });
   };
+  
+
+  /*
+  interface UserFormData {
+    firstName: string;
+    middleName?: string; // Optional field
+    lastName: string;
+    email: string;
+    phoneNumber?: string; // Optional field
+    address?: string; // Optional field
+    adminNotes?: string; // Optional field
+  }
+
+ 
+
+  const submitForm = async (values: UserFormData) => {
+    
+    
+    try {
+      const response = await fetch(`http://localhost:50000/users/update/${user.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(values), // Send the form values
+        
+      });
+  
+      if (response.ok) {
+        //console.log(JSON.stringify(values));
+        const data = await response.json();
+        //console.log(data);
+        setStatus(data.message);
+        //resetForm();
+      } else {
+        const errorData = await response.json();
+        console.error('Error occurred:', errorData);
+        setErrorMessage(errorData.message);
+      }
+    } catch (error) {
+      console.error('Submit error:', error);
+    }
+  };
+  */
 
   
   return (
         <>
           <div className='fixed inset-0 flex items-center justify-center z-50'>
             <div className="bg-white p-8 w-full h-full ">
-              <Form handleClose={handleClose} handleChange={handleChange} submitForm={submitForm} user={user} editedUser={editedUser}/>
+              <Form handleClose={handleClose} submitForm={submitForm} user={user}/>
               {/*<button
                 className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
                 type="button"
