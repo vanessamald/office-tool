@@ -2,8 +2,6 @@ export default function DisplayUsers ({ user, handleDelete, handleEdit }) {
 
     return (
         <>
-         {/*  {users.length > 0 ? ( */}
-                {/*{users.map((user)=> (*/}
         <tbody key={user.id}>
             <tr>
                 <td className='p-2'>{user.id}</td>
@@ -28,13 +26,6 @@ export default function DisplayUsers ({ user, handleDelete, handleEdit }) {
                 </td>       
             </tr>
         </tbody>
-              {/* ))} */}
-           
-
-
-            {/* }) : (
-                <p>No users found.</p>
-            )} */}
         </>
     )
 }

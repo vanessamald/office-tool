@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import React, { useState, useEffect } from 'react';
 import Form from '../components/Form';
 import { useRouter } from 'next/router';
+import { submitForm } from '../utilities/api';
 
 export default function AddNewUser () {
     // open/close modal
@@ -23,31 +24,19 @@ export default function AddNewUser () {
     })
     
     // handle submit form
-    const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
-        // prevent page from reloading
-        event.preventDefault();
-        // reset form
-        //event.target.reset();
+    const handleSubmit = async () => {
+        const result = await submitForm(form);
 
-        const response = await fetch('http://localhost:50000/users/create', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify(form),
-        });
-        // if response ok set response
-        if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        setStatus(data.message); 
+        console.log(form);
+
+        if (result.success) {
+            setStatus(result.message);
+            // reset form
+
         } else {
-            // set error response
-            const errorData = await response.json();
-            console.error('Error occurred:', errorData);
-            setErrorMessage(errorData.message);
+            setErrorMessage(result.message);
         }
-    }
+    };
     
     // handle onChange event
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +65,9 @@ export default function AddNewUser () {
                 </div>
             </div>
                     */}
-            {showModal ? ( <Form handleChange={handleChange} submitForm={submitForm} user='' handleClose={handleClose} />  ) : null}
+            {showModal ? ( <Form handleChange={handleChange} submitForm={handleSubmit} user='' handleClose={handleClose} />  ) : null}
+
+            {status ? <p className='font-medium text-green-500 text-left p-6'>{status}</p> : <p className='font-medium text-red-500 text-left p-6'>{errorMessage}</p>}
         </>
     )
 }

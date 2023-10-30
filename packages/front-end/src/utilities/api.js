@@ -1,3 +1,4 @@
+// fetch all users 
 export async function fetchUserData() {
     try {
       const response = await fetch('http://localhost:50000/users');
@@ -28,3 +29,33 @@ export async function handleDelete (id) {
         console.log(data);
     }
 }
+
+// handle creating a new user
+export async function submitForm (formData)  {
+    console.log(formData);
+      // prevent page from reloading
+      event.preventDefault();
+      // reset form
+      //event.target.reset();
+
+      const response = await fetch('http://localhost:50000/users/create', {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json;charset=utf-8",
+          },
+          body: JSON.stringify(formData),
+      });
+      // if response ok set response
+      if (response.ok) {
+      const data = await response.json();
+      return { success: true, message: data.message };
+      //console.log(data);
+      //setStatus(data.message); 
+      } else {
+          // set error response
+          const errorData = await response.json();
+          console.error('Error occurred:', errorData);
+          //setErrorMessage(errorData.message);
+          return { success: false, message: errorData.message };
+      }
+  }

@@ -30,8 +30,7 @@ export default function EditForm ({ handleClose, user })  {
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     // prevent page from reloading
     event.preventDefault();
-    // reset form
-    //event.target.reset();
+    
   
   const response = await fetch(`http://localhost:50000/users/update/${user.id}`, {
     method: "PUT",
@@ -45,6 +44,9 @@ export default function EditForm ({ handleClose, user })  {
         const data = await response.json();
         console.log(data);
         setStatus(data.message); 
+
+        // reset form
+        resetForm();
       } else {
         // set error response
         const errorData = await response.json();
@@ -52,6 +54,19 @@ export default function EditForm ({ handleClose, user })  {
         setErrorMessage(errorData.message);
         }
     }
+
+  // reset form 
+  const resetForm = () => {
+    setEditedUser({
+      firstName: '',
+      middleName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      address: '',
+      adminNotes: ''
+    });
+  };
 
   
   return (
@@ -66,6 +81,7 @@ export default function EditForm ({ handleClose, user })  {
               >
                 Close
               </button>*/}
+              {status ? <p className='font-medium text-green-500 text-left p-6'>{status}</p> : <p className='font-medium text-red-500 text-left p-6'>{errorMessage}</p>}
             </div> 
           </div>
         </>

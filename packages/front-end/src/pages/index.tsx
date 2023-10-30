@@ -24,7 +24,7 @@ export default function Home() {
         <div>
           <SearchBar/>
         </div>
-        <div className='p-4'>
+        <div className='p-4 flex items-center'>
           <Navigation/>
         </div>
       </main>
