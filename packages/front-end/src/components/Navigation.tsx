@@ -10,13 +10,16 @@ export default function Navigation () {
 
     return (
         <>
-        <nav className='flex flex-col items-center'>
-            <button onClick={() => handleNavigation('/users')} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        <nav className='h-full'>
+            <div className='h-full flex flex-col text-center space-y-4 justify-center px-10'>
+            <button onClick={() => handleNavigation('/users')} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-10 px-4 rounded-lg hover:content-around">
                 All Users
             </button>
-            <button onClick={()=> handleNavigation('/newUser')} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+            <button onClick={()=> handleNavigation('/newUser')} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-10 px-4 rounded-lg hover:content-around">
                 Add New User
             </button>
+            </div>
+            
         </nav>
         </>
     )

@@ -55,16 +55,7 @@ export default function AddNewUser () {
     }
 
     return (
-        <> {/*
-            <div className="w-full max-w-xs">
-                <Form handleClose={handleClose} handleChange={handleChange} submitForm={submitForm} user=''/>   
-                <div>
-                    { errorMessage ? 
-                    <p className='font-medium text-red-500'>{errorMessage}</p>
-                    : '' }
-                </div>
-            </div>
-                    */}
+        <> 
             {showModal ? ( <Form handleChange={handleChange} submitForm={handleSubmit} user='' handleClose={handleClose} />  ) : null}
 
             {status ? <p className='font-medium text-green-500 text-left p-6'>{status}</p> : <p className='font-medium text-red-500 text-left p-6'>{errorMessage}</p>}

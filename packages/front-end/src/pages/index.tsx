@@ -17,14 +17,14 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/public/favicon.ico' />
       </Head>
-      <main className={clsx('w-full h-full', inter.className)}>
-        <h1 className='border-b border-neutral-300 px-4 py-2 text-2xl font-medium text-center'>
+      <main className={clsx('min-h-screen w-full h-full bg-black text-white', inter.className)}>
+        <h1 className='uppercase px-4 py-10 text-2xl font-medium text-center'>
           User Management
         </h1>
-        <div>
+        <div className=''>
           <SearchBar/>
         </div>
-        <div className='p-4 flex items-center'>
+        <div className='h-screen'>
           <Navigation/>
         </div>
       </main>
