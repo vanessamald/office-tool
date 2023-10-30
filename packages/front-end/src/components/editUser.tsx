@@ -28,10 +28,9 @@ export default function EditForm ({ handleClose, user })  {
 
   // handle submit form
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
-    // prevent page from reloading
-    event.preventDefault();
     
-  
+    // prevent page from reloading
+    //event.preventDefault();
   const response = await fetch(`http://localhost:50000/users/update/${user.id}`, {
     method: "PUT",
     headers: {
@@ -53,6 +52,7 @@ export default function EditForm ({ handleClose, user })  {
         console.error('Error occurred:', errorData);
         setErrorMessage(errorData.message);
         }
+        console.log('SUBMIT')
     }
 
   // reset form 
@@ -73,7 +73,7 @@ export default function EditForm ({ handleClose, user })  {
         <>
           <div className='fixed inset-0 flex items-center justify-center z-50'>
             <div className="bg-white p-8 w-full h-full ">
-              <Form handleClose={handleClose} handleChange={handleChange} submitForm={submitForm} user={user}/>
+              <Form handleClose={handleClose} handleChange={handleChange} submitForm={submitForm} user={user} editedUser={editedUser}/>
               {/*<button
                 className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
                 type="button"

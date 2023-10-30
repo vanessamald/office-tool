@@ -1,10 +1,36 @@
 import React, { useState } from 'react';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
-export default function Form ({ handleClose, handleChange, submitForm, user }) {
+export default function UserForm ({ handleClose, handleChange, submitForm, user, editedUser }) {
+    const validationSchema = Yup.object().shape({
+        firstName: Yup.string().required('First Name is required'),
+        middleName: Yup.string(),
+        lastName: Yup.string().required('Last Name is required'),
+        email: Yup.string().email('Invalid email format').required('Email is required'),
+        phoneNumber: Yup.string(),
+        address: Yup.string(),
+        adminNotes: Yup.string(),
+    });
+
+    // Formik submission
+    const handleSubmitFormik = async (values:any) => {
+        console.log('submit click')
+        await submitForm(values);
+    };
+
     return (
         <> 
         <div>
-            <form className="bg-white rounded px-8 pt-6 pb-8 mb-4" onSubmit={submitForm}>
+            <Formik
+                initialValues={user}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmitFormik}
+            >
+                <Form className="bg-white rounded px-8 pt-6 pb-8 mb-4">
+
+        {/*
+            <form className="bg-white rounded px-8 pt-6 pb-8 mb-4" onSubmit={submitForm}> */}
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
                             First Name
@@ -104,6 +130,7 @@ export default function Form ({ handleClose, handleChange, submitForm, user }) {
                     <button
                         type="submit"
                         className="px-4 py-2 font-medium text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+                        onClick={submitForm}
                     >
                         Submit
                     </button>
@@ -114,7 +141,9 @@ export default function Form ({ handleClose, handleChange, submitForm, user }) {
                     >
                         Cancel
                     </button>
-                </form>
+                </Form>
+            </Formik>
+               {/* </form> */}
             </div>  
         </>
     )
