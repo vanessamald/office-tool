@@ -4,11 +4,11 @@ import SearchBar from './search';
 import { fetchUserData } from '../utilities/api.js';
 import EditForm from '../components/editUser';
 import DisplayUsers from '../components/DisplayUsers';
+import { handleEdit, handleDelete } from '../utilities/userFunctions';
 
 export default function AllUsers({  }) {
     // all users
     const [ users, setUsers ] = useState([]);
-    const [searchUser, setSearchUser] = useState('');
 
     // open/close modal
     const [showModal, setShowModal] = useState(false);
@@ -25,21 +25,6 @@ export default function AllUsers({  }) {
         fetchData();
     }, []);
 
-    // handle deleting a user
-    const handleDelete = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
-        console.log('DELETE', id)
-        const response = await fetch(`http://localhost:50000/users/delete/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            }
-        });
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data);
-        }
-    }
-
     // handle edit form
     const handleEdit = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
         // Find the user with the given ID
@@ -49,7 +34,7 @@ export default function AllUsers({  }) {
             setShowModal(true);
         }
     }
-
+    
     // handle closing edit form
     const handleClose = async (event: React.MouseEvent<HTMLButtonElement>) => {
         setShowModal(false);
@@ -141,7 +126,7 @@ export default function AllUsers({  }) {
                     </tr>
                 </thead>
                 {users.map((user)=> (
-                    <DisplayUsers user={user} key={user.id} handleDelete={handleDelete} handleEdit={handleEdit}/>
+                    <DisplayUsers user={user} key={user.id} handleDelete={() => handleDelete(user.id)} handleEdit={handleEdit}/>
                 ))}
             </table>
             {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null}
@@ -149,59 +134,3 @@ export default function AllUsers({  }) {
     </>
   )
 }
-//onClose={() => setShowModal(false)}
-
-
-{/*  Display all users
-
-            {users.length > 0 ? (
-                <table className='table-auto w-full'>
-                    <thead>
-                        <tr className='border-t'>
-                            <th className='p-2 text-left'>
-                                <button onClick={handleSortingById}>User Id</button>
-                            </th>
-                            <th className='p-2 text-left'>
-                                <button onClick={handleSortingByFirstName}>First Name</button>
-                            </th>
-                            <th className='p-2 text-left'>
-                                <button onClick={handleSortingByLastName}>Last Name</button>
-                            </th>
-                            <th className='p-2 text-left'>
-                                <button onClick={handleSortingByEmail}>Email</button>
-                            </th>
-                        </tr>
-                    </thead>
-                    {users.map((user)=> (
-                    <tbody key={user.id}>
-                        <tr>
-                            <td className='p-2'>{user.id}</td>
-                            <td className='p-2'>{user.firstName}</td>
-                            <td className='p-2'>{user.lastName}</td>
-                            <td className='p-2'>{user.email}</td>
-                            <div className='flex space-x-2'>
-                            <td>
-                                <button 
-                                    onClick={(event) => handleDelete(event, user.id)} 
-                                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-                                >
-                                    Delete
-                                </button>
-                            </td>
-                            <td>
-                                <button 
-                                    onClick={(event) => handleEdit(event, user.id)}
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                                >
-                                    Edit
-                                </button>
-                            </td>
-                            </div>  
-                        </tr>
-                    </tbody>
-                    ))}
-                </table> 
-                ) : (
-                <p>No users available.</p>
-                )}
-                */}
