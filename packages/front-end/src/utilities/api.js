@@ -15,6 +15,23 @@ export async function fetchUserData() {
     }
   }
 
+export async function fetchUserProfile() {
+  try {
+    const response = await fetch(`http://localhost:50000/users/profile/${id}`);
+  if (response.ok) {
+    const results = await response.json();
+    return results.data;
+  } else {
+    console.error('Error fetching data:', response.statusText);
+    return [];
+  }
+} catch (error) {
+    console.error('Error fetching data:', error);
+    return [];
+  }
+}
+
+
 // handle deleting a user
 export async function handleDelete (id) {
     console.log('DELETE', id)

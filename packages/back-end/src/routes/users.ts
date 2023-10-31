@@ -121,7 +121,6 @@ const UsersRouter: IRoute = {
       }
     })
 
-
     /*
     router.route('/find')
     // find user by name and email

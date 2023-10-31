@@ -6,7 +6,10 @@ import EditForm from '../components/editUser';
 import DisplayUsers from '../components/DisplayUsers';
 import { handleEdit, handleDelete } from '../utilities/api';
 
+
 export default function AllUsers({  }) {
+    const [ profileView, setProfileView ] = useState(false);
+
     // all users
     const [ users, setUsers ] = useState([]);
 
@@ -25,7 +28,6 @@ export default function AllUsers({  }) {
         fetchData();
     }, []);
 
-    
     const onDeleteSuccess = async (userId) => {
         try {
           await handleDelete(userId);
@@ -36,7 +38,6 @@ export default function AllUsers({  }) {
         }
       };
       
-
     // handle edit form
     const handleEdit = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
         // Find the user with the given ID
@@ -117,6 +118,14 @@ export default function AllUsers({  }) {
         setUsers(sortedUserByEmail);
     }
 
+   
+        const handleProfile = (user) => {
+            console.log('PROFILE VIEW CLICKED');
+            setSelectedUser(user);
+            setProfileView(true);
+          }
+    
+   
     return (
         <>
         <div className='p-4 overflow-x-auto'>
@@ -138,10 +147,13 @@ export default function AllUsers({  }) {
                     </tr>
                 </thead>
                 {users.map((user)=> (
-                    <DisplayUsers user={user} key={user.id} handleEdit={handleEdit}/>
+                    <DisplayUsers user={user} key={user.id} handleEdit={handleEdit} handleProfile={handleProfile}/>
                 ))}
             </table>
             {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null}
+
+            
+
         </div>
     </>
   )

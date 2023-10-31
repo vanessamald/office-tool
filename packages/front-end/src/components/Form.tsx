@@ -6,11 +6,11 @@ export default function UserForm ({ handleClose, submitForm, user }) {
     
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required('First Name is required'),
-        middleName: Yup.string(),
+        middleName: Yup.string().optional(),
         lastName: Yup.string().required('Last Name is required'),
         email: Yup.string().email('Invalid email format').required('Email is required'),
-        phoneNumber: Yup.string(),
-        address: Yup.string(),
+        phoneNumber: Yup.string().optional(),
+        address: Yup.string().optional(),
         adminNotes: Yup.string(),
     });
       
