@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React, { useState, useEffect } from 'react';
 import { fetchUserData } from '../utilities/api.js';
 import DisplayUsers from '../components/DisplayUsers';
-import EditForm from '../components/editUser.jsx';
+import EditForm from '../components/editUser';
 import { handleDelete } from '../utilities/api.js';
 
 export default function SearchBar ({ }) {
@@ -108,8 +108,8 @@ export default function SearchBar ({ }) {
                         <DisplayUsers handleEdit={handleEdit} user={user} key={user.id}/>           
                     ))}
                 </table>
-                {/*
-                {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null} */}
+                
+                {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null} 
             </div>
             : 'No users found' }
         </div>

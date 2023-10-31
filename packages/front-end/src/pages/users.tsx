@@ -53,7 +53,15 @@ export default function AllUsers({  }) {
         sortingByEmail(users, setUsers);
     };
 
-    /*
+    // fetch user data from utilities 
+    useEffect(() => {
+        async function fetchData() {
+            const data = await fetchUserData();
+            setUsers(data);
+        }
+        fetchData();
+    }, []);
+
     // handle edit form
     const handleEdit = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
         // Find the user with the given ID
@@ -63,42 +71,11 @@ export default function AllUsers({  }) {
             setShowModal(true);
         }
     }
-    */
-        
+    
     // handle closing edit form
     const handleClose = async (event: React.MouseEvent<HTMLButtonElement>) => {
         setShowModal(false);
     }
-
-    /*
-      // handle edit user
-  const handleEdit = (user) => {
-    console.log(user)
-    // Redirect to the user editing page
-    router.push(`/${user.id}`);
-  };
-  */
-
-  /*
-    // handle edit form
-    const handleEdit = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
-        // Find the user with the given ID
-        const userToEdit = users.find((user) => user.id === id);
-        if (userToEdit) {
-            setSelectedUser(userToEdit);
-            setShowModal(true);
-
-            console.log(userToEdit);
-
-            // Redirect to the user editing page
-            //router.push(`/edit/${userToEdit}`);
-        }
-    }
-    */
-    const handleEdit = (id) => {
-        router.push(`/edit/${id}`);
-      };
-      
 
     return (
         <>
@@ -121,11 +98,10 @@ export default function AllUsers({  }) {
                     </tr>
                 </thead>
                 {users.map((user)=> (
-                    <DisplayUsers user={user} key={user.id}/>
+                    <DisplayUsers user={user} key={user.id} handleEdit={handleEdit}/>
                 ))}
             </table>
-            {/*
-            {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null} */}
+           {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null}
         </div>
     </>
   )

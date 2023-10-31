@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import Confirmation from "./Confirmation"
 import { useRouter } from 'next/router';
 
-export default function DisplayUsers ({ user }) {// handleEdit }) {
-    //console.log(user);
-
+export default function DisplayUsers ({ user, handleEdit }) {
     const router = useRouter();
 
     const [ confirmationWindow, setConfirmationWindow ] = useState(false);
@@ -20,10 +18,6 @@ export default function DisplayUsers ({ user }) {// handleEdit }) {
     const closeConfirmDialog = () => {
         setConfirmationWindow(false);
     };
-
-    const handleEdit = () => {
-        router.push(`/edit/${user.id}`);
-      };
 
     return (
         <>
@@ -48,9 +42,7 @@ export default function DisplayUsers ({ user }) {// handleEdit }) {
                 </td>
                 <td>
                     <button 
-                        //onClick={() => handleEdit(user)}
-                        onClick={handleEdit}
-                        
+                        onClick={(event) => handleEdit(event, user.id)}
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
                     >
                         Edit

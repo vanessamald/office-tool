@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 export default function UserForm ({ handleClose, submitForm, user }) {
 
-    
+    console.log(user);
     
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required('First Name is required'),
