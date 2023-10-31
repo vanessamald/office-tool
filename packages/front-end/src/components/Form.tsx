@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
-import { Formik, Field, Form, ErrorMessage, FormikHelpers } from 'formik';
+import { Formik, Field, Form, ErrorMessage, FormikHelpers, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
+interface OtherProps {
+    message: string;
+  }
+
 export default function UserForm ({ handleClose, submitForm, user }) {
+    
+
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required('First Name is required'),
         middleName: Yup.string(),
@@ -12,6 +18,8 @@ export default function UserForm ({ handleClose, submitForm, user }) {
         address: Yup.string(),
         adminNotes: Yup.string(),
     });
+
+    //const { touched, errors, isSubmitting, message } = props;
 
     return (
         <> 
@@ -33,6 +41,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                     submitForm(values);
                   }}
             >
+               {({ isSubmitting, handleSubmit }) => ( 
                 <Form className="bg-white rounded px-8 pt-6 pb-8 mb-4">
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
@@ -45,6 +54,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             placeholder="First Name"
                             name="firstName"
                         />
+                         <ErrorMessage name="firstName" component="div" className="text-red-500" />
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="middleName">
@@ -57,6 +67,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             placeholder="Middle Name"
                             name="middleName"
                         />
+                        <ErrorMessage name="middleName" component="div" className="text-red-500" />
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
@@ -69,6 +80,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             placeholder="Last Name"
                             name="lastName"
                         />
+                        <ErrorMessage name="lastName" component="div" className="text-red-500" />
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -93,6 +105,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             placeholder="Phone Number"
                             name="phoneNumber"
                         />
+                        <ErrorMessage name="phoneNumber" component="div" className="text-red-500" />
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
@@ -105,6 +118,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             placeholder="Address"
                             name="address"
                         />
+                        <ErrorMessage name="address" component="div" className="text-red-500" />
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="adminNotes">
@@ -117,11 +131,13 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             placeholder="Notes"
                             name="adminNotes"
                         />
+                        <ErrorMessage name="adminNotes" component="div" className="text-red-500" />
                     </div>
                     <button
                         type="submit"
                         className="px-4 py-2 font-medium text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
                         //onClick={submitForm}
+                        disabled={isSubmitting}
                     >
                         Submit
                     </button>
@@ -129,10 +145,12 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                         className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
                         type="button"
                         onClick={handleClose}
+                        
                     >
                         Cancel
                     </button>
                 </Form>
+                )}
             </Formik>
         </div>  
         </>
