@@ -30,6 +30,38 @@ const UsersRouter: IRoute = {
       })
     ;
 
+    router.route('/:id')
+    // Fetch all users
+    .get(async (req, res) => {
+      // pro tip: if you're not seeing any users, make sure you seeded the database.
+      //          make sure you read the readme! :)
+
+      const { id } = req.params;
+
+      const user = await User.findOne({
+        where: { id },
+      })
+      try {
+        // if user not found return error
+        if (!user) {
+          return res.status(404).json({ 
+            success: false,
+            message: 'User not found in the database'
+          })
+        }
+        // success message
+        return res.status(201).json({
+          success: true,
+          message: 'User found',
+          data: user
+        });
+      } catch (error) {
+        console.error('Failed to delete user', error);
+      }
+      console.log(user)
+    })
+  ;
+
     router.route('/create')
     // create a new user
     .post(async (req, res)=> {

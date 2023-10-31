@@ -3,6 +3,8 @@ import { Formik, Field, Form, ErrorMessage, FormikHelpers, FormikProps, FormikVa
 import * as Yup from 'yup';
 
 export default function UserForm ({ handleClose, submitForm, user }) {
+
+    
     
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required('First Name is required'),
@@ -19,6 +21,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
         <div>
             <Formik
                 // set initial values in the form, return empty string if null
+               
                 initialValues={{
                     firstName: user.firstName || '',
                     middleName:  user.middleName  || '',
@@ -28,6 +31,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                     address: user.address || '',
                     adminNotes: user.adminNotes || ''
                 }}
+
                 validationSchema={validationSchema}
                 onSubmit={(values) => {
                     // Pass the form values to the submitForm function
@@ -37,6 +41,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                   }}
             >
               {/* {({ isSubmitting, handleSubmit }) => ( */}
+              
                 <Form className="bg-white rounded px-8 pt-6 pb-8 mb-4">
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
@@ -145,6 +150,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                         Cancel
                     </button>
                 </Form>
+                 
                {/* )} */}
             </Formik>
         </div>  

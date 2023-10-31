@@ -5,17 +5,15 @@ import { fetchUserData } from '../utilities/api.js';
 import EditForm from '../components/editUser';
 import DisplayUsers from '../components/DisplayUsers';
 import { handleEdit, handleDelete } from '../utilities/api';
-
+import { sortingById, sortingByEmail, sortingByFirstName, sortingByLastName  } from '../utilities/sorting';
+import { useRouter } from 'next/router';
 
 export default function AllUsers({  }) {
-    const [ profileView, setProfileView ] = useState(false);
-
+    const router = useRouter();
     // all users
     const [ users, setUsers ] = useState([]);
-
     // open/close modal
     const [showModal, setShowModal] = useState(false);
-
     // selected user to edit
     const [ selectedUser, setSelectedUser ] = useState(null);
 
@@ -37,7 +35,25 @@ export default function AllUsers({  }) {
           console.error('Failed to delete user:', error);
         }
       };
-      
+    
+    // handle sorting from utilities
+    const handleSortingByLastName = () => {
+        sortingByLastName(users, setUsers);
+      };
+
+    const handleSortingById = () => {
+        sortingById(users, setUsers);
+    };
+
+    const handleSortingByFirstName = () => {
+        sortingByFirstName(users, setUsers);
+      };
+
+    const handleSortingByEmail = () => {
+        sortingByEmail(users, setUsers);
+    };
+
+    /*
     // handle edit form
     const handleEdit = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
         // Find the user with the given ID
@@ -47,85 +63,43 @@ export default function AllUsers({  }) {
             setShowModal(true);
         }
     }
-    
+    */
+        
     // handle closing edit form
     const handleClose = async (event: React.MouseEvent<HTMLButtonElement>) => {
         setShowModal(false);
     }
-    
-    // handle sorting by id 
-    const handleSortingById = () => {
-        console.log('BUTTON CLICKED')
-        // copy of the users array
-        const sortedUsersById = [...users];
-        // sort users by id
-        sortedUsersById.sort((a, b)=>  a.id - b.id)
 
-        // update the user array
-        setUsers(sortedUsersById);
-        console.log(sortedUsersById)
-    };
+    /*
+      // handle edit user
+  const handleEdit = (user) => {
+    console.log(user)
+    // Redirect to the user editing page
+    router.push(`/${user.id}`);
+  };
+  */
 
-    // handle sorting by name 
-    const handleSortingByFirstName = () => {
-        // make a copy of the users array
-        const sortedUsers = [...users];
-        // sort users by first name
-        sortedUsers.sort((a, b)=> {
-            if (a.firstName < b.firstName ) {
-                return -1
-            }
-            if (a.firstName > b.firstName) {
-                return 1
-            } else {
-                return 0;
-            } 
-        })
-        // update the user array
-        setUsers(sortedUsers);
-        console.log(sortedUsers);
+  /*
+    // handle edit form
+    const handleEdit = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
+        // Find the user with the given ID
+        const userToEdit = users.find((user) => user.id === id);
+        if (userToEdit) {
+            setSelectedUser(userToEdit);
+            setShowModal(true);
+
+            console.log(userToEdit);
+
+            // Redirect to the user editing page
+            //router.push(`/edit/${userToEdit}`);
+        }
     }
+    */
+    const handleEdit = (id) => {
+        router.push(`/edit/${id}`);
+      };
+      
 
-    // sort users by last name
-    const handleSortingByLastName = () => {
-        const sortedUsers = [...users];
-        sortedUsers.sort((a, b) => {
-             // sort users by last name
-             if (a.lastName > b.lastName) {
-                return 1;
-            } else if (a.lastName < b.lastName) {
-                return -1;
-            } else {
-                return 0;
-            }  
-        })
-        setUsers(sortedUsers)
-    }
-
-    // sort users by email
-    const handleSortingByEmail = () => {
-        console.log('Sorting by Email')
-        const sortedUserByEmail = [...users];
-        sortedUserByEmail.sort((a, b) => {
-            if (a.email < b.email) {
-                return -1
-            }
-            if (a.email < b.email) {
-                return 1
-            }  
-        })
-        // update the user array
-        setUsers(sortedUserByEmail);
-    }
-
-   
-        const handleProfile = (user) => {
-            console.log('PROFILE VIEW CLICKED');
-            setSelectedUser(user);
-            setProfileView(true);
-          }
-    
-   
     return (
         <>
         <div className='p-4 overflow-x-auto'>
@@ -147,13 +121,11 @@ export default function AllUsers({  }) {
                     </tr>
                 </thead>
                 {users.map((user)=> (
-                    <DisplayUsers user={user} key={user.id} handleEdit={handleEdit} handleProfile={handleProfile}/>
+                    <DisplayUsers user={user} key={user.id}/>
                 ))}
             </table>
-            {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null}
-
-            
-
+            {/*
+            {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null} */}
         </div>
     </>
   )

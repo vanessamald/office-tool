@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import Confirmation from "./Confirmation"
+import { useRouter } from 'next/router';
 
-export default function DisplayUsers ({ user, handleEdit, handleProfile }) {
+export default function DisplayUsers ({ user }) {// handleEdit }) {
+    //console.log(user);
+
+    const router = useRouter();
+
     const [ confirmationWindow, setConfirmationWindow ] = useState(false);
     const [ dropdown, setDropDown ] = useState(false);
 
@@ -15,6 +20,10 @@ export default function DisplayUsers ({ user, handleEdit, handleProfile }) {
     const closeConfirmDialog = () => {
         setConfirmationWindow(false);
     };
+
+    const handleEdit = () => {
+        router.push(`/edit/${user.id}`);
+      };
 
     return (
         <>
@@ -39,7 +48,9 @@ export default function DisplayUsers ({ user, handleEdit, handleProfile }) {
                 </td>
                 <td>
                     <button 
-                        onClick={(event) => handleEdit(event, user.id)}
+                        //onClick={() => handleEdit(user)}
+                        onClick={handleEdit}
+                        
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
                     >
                         Edit

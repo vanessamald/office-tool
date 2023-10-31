@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React, { useState, useEffect } from 'react';
 import Form from '../components/Form';
 import { useRouter } from 'next/router';
-import { submitForm } from '../utilities/api';
+import { submitNewUserForm } from '../utilities/api';
 
 export default function AddNewUser () {
     // open/close modal
@@ -12,19 +12,7 @@ export default function AddNewUser () {
     const [ status, setStatus ] = useState('');
     const [ errorMessage, setErrorMessage ] = useState('');
 
-    /*
-    // user form
-    const [ form, setForm ] = useState({
-        firstName: '',
-        middleName: '',
-        lastName: '',
-        email: '',
-        phoneNumber: '',
-        address: '',
-        adminNotes: ''
-    })
-    */
-
+    
     interface UserFormData {
         firstName: string;
         middleName?: string; // Optional field
@@ -37,7 +25,7 @@ export default function AddNewUser () {
     
     // handle submit form
     const handleSubmit = async (values: UserFormData) => {
-        const result = await submitForm(values);
+        const result = await submitNewUserForm(values);
 
         console.log(values);
 
