@@ -9,6 +9,16 @@ import { sortingById, sortingByEmail, sortingByFirstName, sortingByLastName  } f
 import { useRouter } from 'next/router';
 
 export default function AllUsers({  }) {
+    /*
+    const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+    // Toggle the dropdown visibility
+    const toggleDropdown = () => {
+      setDropdownVisible(!isDropdownVisible);
+      console.log('TOGGLE BUTTON')
+    };
+    */
+
     const router = useRouter();
     // all users
     const [ users, setUsers ] = useState([]);
@@ -98,7 +108,7 @@ export default function AllUsers({  }) {
                     </tr>
                 </thead>
                 {users.map((user)=> (
-                    <DisplayUsers user={user} key={user.id} handleEdit={handleEdit}/>
+                    <DisplayUsers user={user} key={user.id} handleEdit={handleEdit} />
                 ))}
             </table>
            {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null}
