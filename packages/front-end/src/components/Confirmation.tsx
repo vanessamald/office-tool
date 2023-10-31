@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { handleDelete } from '../utilities/api';
 import { useRouter } from 'next/router';
 
-export default function Confirmation({ user, closeConfirmDialog }) {
+export default function Confirmation({ user, closeConfirmDialog, onUserDelete }) {
     const router = useRouter();
     const [open, setOpen] = useState(true);
     // update status message for deleting a user
@@ -19,8 +19,8 @@ export default function Confirmation({ user, closeConfirmDialog }) {
             await handleDelete(user.id);
             setStatus('User has been successfully deleted');
             setConfirmed(true);
-            //onDeleteSuccess(user.id);
             //router.push('/');
+            onUserDelete(user.id);
         } catch (error) {
             setStatus(`Error: ${error.message}`);
             console.error(error);

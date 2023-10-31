@@ -26,10 +26,9 @@ export default function AllUsers({  }) {
     }, []);
 
     
-    // reload users on delete
     const onDeleteSuccess = async (userId) => {
         try {
-          //await handleDelete(userId);
+          await handleDelete(userId);
           // Remove the user from the list
           setUsers(users.filter((user) => user.id !== userId));
         } catch (error) {
@@ -139,7 +138,7 @@ export default function AllUsers({  }) {
                     </tr>
                 </thead>
                 {users.map((user)=> (
-                    <DisplayUsers user={user} key={user.id} handleEdit={handleEdit} onDeleteSuccess={onDeleteSuccess}/>
+                    <DisplayUsers user={user} key={user.id} handleEdit={handleEdit}/>
                 ))}
             </table>
             {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null}

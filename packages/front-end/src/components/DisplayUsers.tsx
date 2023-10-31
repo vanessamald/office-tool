@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Confirmation from "./Confirmation"
 
-export default function DisplayUsers ({ user, handleEdit, onDeleteSuccess }) {
+export default function DisplayUsers ({ user, handleEdit }) {
     const [ confirmationWindow, setConfirmationWindow ] = useState(false);
     const [ dropdown, setDropDown ] = useState(false);
 
