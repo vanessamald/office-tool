@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import { Formik, Field, Form, ErrorMessage, FormikHelpers, FormikProps } from 'formik';
+import { Formik, Field, Form, ErrorMessage, FormikHelpers, FormikProps, FormikValues } from 'formik';
 import * as Yup from 'yup';
-
-interface OtherProps {
-    message: string;
-  }
 
 export default function UserForm ({ handleClose, submitForm, user }) {
     
@@ -18,9 +14,8 @@ export default function UserForm ({ handleClose, submitForm, user }) {
         address: Yup.string(),
         adminNotes: Yup.string(),
     });
-
-    //const { touched, errors, isSubmitting, message } = props;
-
+      
+      
     return (
         <> 
         <div>
@@ -39,9 +34,11 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                 onSubmit={(values) => {
                     // Pass the form values to the submitForm function
                     submitForm(values);
+                    //setSubmitting(false);
+
                   }}
             >
-               {({ isSubmitting, handleSubmit }) => ( 
+              {/* {({ isSubmitting, handleSubmit }) => ( */}
                 <Form className="bg-white rounded px-8 pt-6 pb-8 mb-4">
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
@@ -137,7 +134,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                         type="submit"
                         className="px-4 py-2 font-medium text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
                         //onClick={submitForm}
-                        disabled={isSubmitting}
+                        //disabled={isSubmitting}
                     >
                         Submit
                     </button>
@@ -150,7 +147,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                         Cancel
                     </button>
                 </Form>
-                )}
+               {/* )} */}
             </Formik>
         </div>  
         </>

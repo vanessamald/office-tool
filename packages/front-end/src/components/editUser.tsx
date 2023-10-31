@@ -48,7 +48,7 @@ export default function EditForm ({ handleClose, user })  {
         const data = await response.json();
         console.log(data);
         setStatus(data.message); 
-
+        console.log(status);
         // reset form
         //resetForm();
       } else {
@@ -115,7 +115,7 @@ export default function EditForm ({ handleClose, user })  {
   return (
         <>
           <div className='fixed inset-0 flex items-center justify-center z-50'>
-            <div className="bg-white p-8 w-full h-full ">
+            <div className="bg-white p-8 w-full h-full">
               <Form handleClose={handleClose} submitForm={submitForm} user={user}/>
               {/*<button
                 className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
@@ -125,7 +125,10 @@ export default function EditForm ({ handleClose, user })  {
                 Close
               </button>*/}
               {status ? <p className='font-medium text-green-500 text-left p-6'>{status}</p> : <p className='font-medium text-red-500 text-left p-6'>{errorMessage}</p>}
+              
+              
             </div> 
+            
           </div>
         </>
     )

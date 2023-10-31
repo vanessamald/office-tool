@@ -17,7 +17,7 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/public/favicon.ico' />
       </Head>
-      <main className={clsx('min-h-screen w-full h-full bg-black text-white', inter.className)}>
+      <main className={clsx('min-h-screen w-full h-full', inter.className)}>
         <h1 className='uppercase px-4 py-10 text-2xl font-medium text-center'>
           User Management
         </h1>
