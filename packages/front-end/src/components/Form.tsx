@@ -19,10 +19,10 @@ export default function UserForm ({ handleClose, submitForm, user }) {
             <Formik
                 // set initial values in the form, return empty string if null
                 initialValues={{
-                    firstName: user.firstName,
+                    firstName: user.firstName || '',
                     middleName:  user.middleName  || '',
-                    lastName: user.lastName,
-                    email: user.email,
+                    lastName: user.lastName || '',
+                    email: user.email || '',
                     phoneNumber: user.phoneNumber || '',
                     address: user.address || '',
                     adminNotes: user.adminNotes || ''

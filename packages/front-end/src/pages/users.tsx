@@ -4,7 +4,7 @@ import SearchBar from './search';
 import { fetchUserData } from '../utilities/api.js';
 import EditForm from '../components/editUser';
 import DisplayUsers from '../components/DisplayUsers';
-import { handleEdit, handleDelete } from '../utilities/userFunctions';
+import { handleEdit, handleDelete } from '../utilities/api';
 
 export default function AllUsers({  }) {
     // all users

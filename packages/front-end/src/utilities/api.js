@@ -30,11 +30,12 @@ export async function handleDelete (id) {
     }
 }
 
+
 // handle creating a new user
 export async function submitForm (formData)  {
     console.log(formData);
       // prevent page from reloading
-      event.preventDefault();
+      //event.preventDefault();
       // reset form
       //event.target.reset();
 
@@ -52,10 +53,10 @@ export async function submitForm (formData)  {
       //console.log(data);
       //setStatus(data.message); 
       } else {
-          // set error response
-          const errorData = await response.json();
-          console.error('Error occurred:', errorData);
-          //setErrorMessage(errorData.message);
-          return { success: false, message: errorData.message };
+        // set error response
+        const errorData = await response.json();
+        console.error('Error occurred:', errorData);
+        //setErrorMessage(errorData.message);
+        return { success: false, message: errorData.message };
       }
   }

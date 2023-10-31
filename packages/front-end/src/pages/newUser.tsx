@@ -12,6 +12,7 @@ export default function AddNewUser () {
     const [ status, setStatus ] = useState('');
     const [ errorMessage, setErrorMessage ] = useState('');
 
+    /*
     // user form
     const [ form, setForm ] = useState({
         firstName: '',
@@ -22,12 +23,23 @@ export default function AddNewUser () {
         address: '',
         adminNotes: ''
     })
+    */
+
+    interface UserFormData {
+        firstName: string;
+        middleName?: string; // Optional field
+        lastName: string;
+        email: string;
+        phoneNumber?: string; // Optional field
+        address?: string; // Optional field
+        adminNotes?: string; // Optional field
+      }
     
     // handle submit form
-    const handleSubmit = async () => {
-        const result = await submitForm(form);
+    const handleSubmit = async (values: UserFormData) => {
+        const result = await submitForm(values);
 
-        console.log(form);
+        console.log(values);
 
         if (result.success) {
             setStatus(result.message);
@@ -37,15 +49,6 @@ export default function AddNewUser () {
             setErrorMessage(result.message);
         }
     };
-    
-    // handle onChange event
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setForm({
-            ...form,
-            [event.target.id]: event.target.value
-        })
-        console.log(form);
-    }
 
     // take user back to home page when add new user page is closed 
     const router = useRouter();
@@ -56,7 +59,7 @@ export default function AddNewUser () {
 
     return (
         <> 
-            {showModal ? ( <Form handleChange={handleChange} submitForm={handleSubmit} user='' handleClose={handleClose} />  ) : null}
+            {showModal ? ( <Form submitForm={handleSubmit} user='' handleClose={handleClose} />  ) : null}
 
             {status ? <p className='font-medium text-green-500 text-left p-6'>{status}</p> : <p className='font-medium text-red-500 text-left p-6'>{errorMessage}</p>}
         </>

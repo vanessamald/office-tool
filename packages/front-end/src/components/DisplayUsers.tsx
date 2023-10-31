@@ -1,5 +1,7 @@
 export default function DisplayUsers ({ user, handleDelete, handleEdit }) {
 
+    console.log(user.id);
+
     return (
         <>
         <tbody key={user.id}>

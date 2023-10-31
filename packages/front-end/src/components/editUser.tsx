@@ -7,31 +7,6 @@ export default function EditForm ({ handleClose, user })  {
   const [ status, setStatus ] = useState('');
   const [ errorMessage, setErrorMessage ] = useState('');
 
-  
-  const [ editedUser, setEditedUser ] = useState({
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    address: '',
-    adminNotes: ''
-  });
-  
-console.log(user);
-  
-/*
-  const [editedUser, setEditedUser] = useState({
-    firstName: user.firstName,
-    middleName: user.middleName,
-    lastName: user.lastName,
-    email: user.email,
-    phoneNumber: user.phoneNumber,
-    address: user.address,
-    adminNotes: user.adminNotes,
-  });
-  */
-
   /*
   const [ editedUser, setEditedUser ] = useState({
     firstName: '',
@@ -43,24 +18,21 @@ console.log(user);
     adminNotes: ''
   });
   */
-  //const [ editedUser, setEditedUser ] = useState();
+  
+  console.log(user);
 
-  /*
-  // handle onChange event
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEditedUser({
-      ...editedUser,
-      [event.target.id]: event.target.value
-    })
-    //console.log(editedUser);
+  interface UserFormData {
+    firstName: string;
+    middleName?: string; // Optional field
+    lastName: string;
+    email: string;
+    phoneNumber?: string; // Optional field
+    address?: string; // Optional field
+    adminNotes?: string; // Optional field
   }
-  */
-
   
-
-
   // handle submit form
-  const submitForm = async (values) => {
+  const submitForm = async (values: UserFormData) => {
     
     // prevent page from reloading
     //event.preventDefault();
@@ -78,7 +50,7 @@ console.log(user);
         setStatus(data.message); 
 
         // reset form
-        resetForm();
+        //resetForm();
       } else {
         // set error response
         const errorData = await response.json();
@@ -88,6 +60,7 @@ console.log(user);
         console.log('SUBMIT')
     }
 
+  /*
   // reset form 
   const resetForm = () => {
     setEditedUser({
@@ -100,18 +73,11 @@ console.log(user);
       adminNotes: ''
     });
   };
+  */
   
 
   /*
-  interface UserFormData {
-    firstName: string;
-    middleName?: string; // Optional field
-    lastName: string;
-    email: string;
-    phoneNumber?: string; // Optional field
-    address?: string; // Optional field
-    adminNotes?: string; // Optional field
-  }
+
 
  
 
