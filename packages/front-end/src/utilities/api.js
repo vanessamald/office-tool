@@ -27,9 +27,12 @@ export async function handleDelete (id) {
     if (response.ok) {
         const data = await response.json();
         console.log(data);
+        return data;
+    } else {
+      const errorData = await response.json();
+      throw new Error(errorData.message);
     }
 }
-
 
 // handle creating a new user
 export async function submitForm (formData)  {

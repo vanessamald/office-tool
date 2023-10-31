@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
 import Confirmation from "./Confirmation"
 
-export default function DisplayUsers ({ user, handleDelete, handleEdit }) {
+export default function DisplayUsers ({ user, handleEdit }) {
     const [ confirmationWindow, setConfirmationWindow ] = useState(false);
+    const [ dropdown, setDropDown ] = useState(false);
 
+    // open confirmation window
+    const openConfirmDialog = () => {
+        setConfirmationWindow(true);
+        console.log('clicked')
+    };
 
-
-  const openConfirmDialog = () => {
-    setConfirmationWindow(true);
-    console.log('clicked')
-  };
-
-  const closeConfirmDialog = () => {
-    setConfirmationWindow(false);
-  };
-    const confirmDelete = (event) => {
-        handleDelete(event, user.id);
-        closeConfirmDialog();
-      };
-
-
+    // close confirmation window
+    const closeConfirmDialog = () => {
+        setConfirmationWindow(false);
+    };
 
     return (
         <>
-      
         <tbody key={user.id}>
             <tr>
                 <td className='p-2'>{user.id}</td>
@@ -33,34 +27,15 @@ export default function DisplayUsers ({ user, handleDelete, handleEdit }) {
                 <td>
                     <button 
                         onClick={openConfirmDialog}
-
-                        //onClick={(event) => handleDelete(event, user.id)} 
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
                     >
                         Delete
                     </button>
                     {confirmationWindow && (
                         <div className=''>
-                            <Confirmation handleDelete={handleDelete} user={user} closeConfirmDialog={closeConfirmDialog}/>
-                            {/*
-                            <p>Are you sure you want to delete the user?</p>
-                            <button 
-                                className='bg-green-500 hover:bg-green-700'
-                                onClick={confirmDelete}
-                            >
-                                Yes
-                            </button>
-                            <button 
-                                className='bg-red-500 hover:bg-red-700'
-                                onClick={closeConfirmDialog}
-                            >
-                                Cancel
-                            </button>
-                    */}
+                            <Confirmation  user={user} closeConfirmDialog={closeConfirmDialog}/>
                         </div>
-                        
-
-               )}
+                    )}
                 </td>
                 <td>
                     <button 
@@ -71,9 +46,7 @@ export default function DisplayUsers ({ user, handleDelete, handleEdit }) {
                     </button>
                 </td>       
             </tr>
-        </tbody>
-        
-            
+        </tbody>   
         </>
     )
 }

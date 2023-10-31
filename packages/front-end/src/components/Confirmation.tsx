@@ -1,14 +1,26 @@
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import { handleDelete } from '../utilities/api';
 
-export default function Confirmation({handleDelete, user, closeConfirmDialog }) {
-    const [open, setOpen] = useState(true)
+export default function Confirmation({ user, closeConfirmDialog }) {
+    const [open, setOpen] = useState(true);
+    // update status message for deleting a user
+    const [ statusMessage, setStatus ] = useState('Are you sure you want to delete the user? This action is permanent.');
+    // state for confirmation window
+    const [confirmed, setConfirmed] = useState(false);
 
-    const cancelButtonRef = useRef(null)
+    const cancelButtonRef = useRef(null);
 
-    const confirmDelete = () => {
-        handleDelete(user.id);
-        setOpen(false);
+    // delete user 
+    const confirmDelete = async () => {
+        try {
+            await handleDelete(user.id);
+            setStatus('User has been successfully deleted');
+            setConfirmed(true);
+        } catch (error) {
+            setStatus(`Error: ${error.message}`);
+            console.error(error);
+        }   
     };
 
     return (
@@ -50,14 +62,29 @@ export default function Confirmation({handleDelete, user, closeConfirmDialog }) 
                                             </Dialog.Title>
                                             <div className="mt-2">
                                                 <p className="text-sm text-gray-500">
-                                                    Are you sure you want to delete the user? All of the data will be permanently
-                                                   removed. This action cannot be undone.
+                                                    {statusMessage}
+                                                    {/*Are you sure you want to delete the user? All of the data will be permanently
+                                                   removed. This action cannot be undone.*/}
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                {confirmed ? (
+                                    <button
+                                        type="button"
+                                        className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                                        onClick={() => {
+                                            closeConfirmDialog();
+                                            setOpen(false);
+                                        }}
+                                        ref={cancelButtonRef}
+                                    >
+                                        Close
+                                    </button>
+                                    ) : (
+                                    <>
                                     <button
                                         type="button"
                                         className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
@@ -76,6 +103,8 @@ export default function Confirmation({handleDelete, user, closeConfirmDialog }) 
                                     >
                                         Delete
                                     </button>
+                                    </>
+                                    )}  
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>
