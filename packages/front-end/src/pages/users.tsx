@@ -83,16 +83,16 @@ export default function AllUsers({  }) {
             <table className='table-auto w-full'>
                 <thead>
                     <tr className='border-t'>
-                        <th className='p-2 text-left'>
-                            <button onClick={handleSortingById}>User Id</button>
+                        <th className='p-2 text-center sm:text-left'>
+                            <button onClick={handleSortingById}>Id</button>
                         </th>
-                        <th className='p-2 text-left'>
+                        <th className='p-2 text-center sm:text-left'>
                             <button onClick={handleSortingByFirstName}>First Name</button>
                         </th>
-                        <th className='p-2 text-left'>
+                        <th className='p-2 text-center sm:text-left'>
                             <button onClick={handleSortingByLastName}>Last Name</button>
                         </th>
-                        <th className='p-2 text-left'>
+                        <th className='p-2 text-center sm:text-left'>
                             <button onClick={handleSortingByEmail}>Email</button>
                         </th>
                     </tr>
