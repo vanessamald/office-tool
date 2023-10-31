@@ -1,23 +1,14 @@
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import Form from './Form';
+import { useRouter } from 'next/router';
 
 export default function EditForm ({ handleClose, user })  {
+  const router = useRouter();
+
   // status and error message 
   const [ status, setStatus ] = useState('');
   const [ errorMessage, setErrorMessage ] = useState('');
-
-  /*
-  const [ editedUser, setEditedUser ] = useState({
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    address: '',
-    adminNotes: ''
-  });
-  */
   
   console.log(user);
 
@@ -51,6 +42,7 @@ export default function EditForm ({ handleClose, user })  {
         console.log(status);
         // reset form
         //resetForm();
+        router.push('/');
       } else {
         // set error response
         const errorData = await response.json();
@@ -60,75 +52,13 @@ export default function EditForm ({ handleClose, user })  {
         console.log('SUBMIT')
     }
 
-  /*
-  // reset form 
-  const resetForm = () => {
-    setEditedUser({
-      firstName: '',
-      middleName: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-      address: '',
-      adminNotes: ''
-    });
-  };
-  */
-  
-
-  /*
-
-
- 
-
-  const submitForm = async (values: UserFormData) => {
-    
-    
-    try {
-      const response = await fetch(`http://localhost:50000/users/update/${user.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify(values), // Send the form values
-        
-      });
-  
-      if (response.ok) {
-        //console.log(JSON.stringify(values));
-        const data = await response.json();
-        //console.log(data);
-        setStatus(data.message);
-        //resetForm();
-      } else {
-        const errorData = await response.json();
-        console.error('Error occurred:', errorData);
-        setErrorMessage(errorData.message);
-      }
-    } catch (error) {
-      console.error('Submit error:', error);
-    }
-  };
-  */
-
-  
   return (
         <>
           <div className='fixed inset-0 flex items-center justify-center z-50'>
             <div className="bg-white p-8 w-full h-full">
               <Form handleClose={handleClose} submitForm={submitForm} user={user}/>
-              {/*<button
-                className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
-                type="button"
-                onClick={handleClose}
-              >
-                Close
-              </button>*/}
-              {status ? <p className='font-medium text-green-500 text-left p-6'>{status}</p> : <p className='font-medium text-red-500 text-left p-6'>{errorMessage}</p>}
-              
-              
+              {status ? <p className='font-medium text-green-500 text-left'>{status}</p> : <p className='font-medium text-red-500 text-left'>{errorMessage}</p>}  
             </div> 
-            
           </div>
         </>
     )

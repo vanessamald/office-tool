@@ -4,7 +4,6 @@ import * as Yup from 'yup';
 
 export default function UserForm ({ handleClose, submitForm, user }) {
     
-
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required('First Name is required'),
         middleName: Yup.string(),
@@ -14,7 +13,6 @@ export default function UserForm ({ handleClose, submitForm, user }) {
         address: Yup.string(),
         adminNotes: Yup.string(),
     });
-      
       
     return (
         <> 

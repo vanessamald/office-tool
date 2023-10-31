@@ -25,6 +25,19 @@ export default function AllUsers({  }) {
         fetchData();
     }, []);
 
+    
+    // reload users on delete
+    const onDeleteSuccess = async (userId) => {
+        try {
+          //await handleDelete(userId);
+          // Remove the user from the list
+          setUsers(users.filter((user) => user.id !== userId));
+        } catch (error) {
+          console.error('Failed to delete user:', error);
+        }
+      };
+      
+
     // handle edit form
     const handleEdit = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
         // Find the user with the given ID
@@ -126,7 +139,7 @@ export default function AllUsers({  }) {
                     </tr>
                 </thead>
                 {users.map((user)=> (
-                    <DisplayUsers user={user} key={user.id} handleDelete={() => handleDelete(user.id)} handleEdit={handleEdit}/>
+                    <DisplayUsers user={user} key={user.id} handleEdit={handleEdit} onDeleteSuccess={onDeleteSuccess}/>
                 ))}
             </table>
             {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Confirmation from "./Confirmation"
 
-export default function DisplayUsers ({ user, handleEdit }) {
+export default function DisplayUsers ({ user, handleEdit, onDeleteSuccess }) {
     const [ confirmationWindow, setConfirmationWindow ] = useState(false);
     const [ dropdown, setDropDown ] = useState(false);
 
@@ -33,7 +33,7 @@ export default function DisplayUsers ({ user, handleEdit }) {
                     </button>
                     {confirmationWindow && (
                         <div className=''>
-                            <Confirmation  user={user} closeConfirmDialog={closeConfirmDialog}/>
+                            <Confirmation user={user} closeConfirmDialog={closeConfirmDialog} />
                         </div>
                     )}
                 </td>

@@ -105,7 +105,7 @@ export default function SearchBar ({ }) {
                         </tr>
                     </thead>
                     {filteredUsers.map((user) => (
-                        <DisplayUsers handleDelete={() => handleDelete(user.id)} handleEdit={handleEdit} user={user} key={user.id}/>           
+                        <DisplayUsers handleEdit={handleEdit} user={user} key={user.id}/>           
                     ))}
                 </table>
                 {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null}

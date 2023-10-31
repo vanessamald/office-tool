@@ -1,8 +1,10 @@
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { handleDelete } from '../utilities/api';
+import { useRouter } from 'next/router';
 
 export default function Confirmation({ user, closeConfirmDialog }) {
+    const router = useRouter();
     const [open, setOpen] = useState(true);
     // update status message for deleting a user
     const [ statusMessage, setStatus ] = useState('Are you sure you want to delete the user? This action is permanent.');
@@ -11,12 +13,14 @@ export default function Confirmation({ user, closeConfirmDialog }) {
 
     const cancelButtonRef = useRef(null);
 
-    // delete user 
+    // delete user and update status message
     const confirmDelete = async () => {
         try {
             await handleDelete(user.id);
             setStatus('User has been successfully deleted');
             setConfirmed(true);
+            //onDeleteSuccess(user.id);
+            //router.push('/');
         } catch (error) {
             setStatus(`Error: ${error.message}`);
             console.error(error);

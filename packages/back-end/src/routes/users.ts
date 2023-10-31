@@ -121,6 +121,8 @@ const UsersRouter: IRoute = {
       }
     })
 
+
+    /*
     router.route('/find')
     // find user by name and email
     .get(async(req, res)=> {
@@ -167,7 +169,8 @@ const UsersRouter: IRoute = {
             data: users
           })
         })
-    })
+        
+    })*/
     return router;
   },
 };
