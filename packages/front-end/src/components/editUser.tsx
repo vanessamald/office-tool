@@ -58,10 +58,10 @@ export default function EditForm ({ user, handleClose })  {
   return (
         <>
           <div className='fixed inset-0 flex items-center justify-center z-50'>
-            <div className="bg-white p-8 w-full h-full">
+            <div className="bg-blueish p-8 w-full h-full">
               
               <Form handleClose={handleClose} submitForm={submitForm} user={user}/>
-              {status ? <p className='font-medium text-green-500 text-left'>{status}</p> : <p className='font-medium text-red-500 text-left'>{errorMessage}</p>}  
+              {status ? <p className='font-medium text-green text-left'>{status}</p> : <p className='font-medium text-red text-left'>{errorMessage}</p>}  
             </div> 
           </div>
         </>

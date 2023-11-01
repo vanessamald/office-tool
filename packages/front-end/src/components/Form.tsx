@@ -18,7 +18,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
       
     return (
         <> 
-        <div>
+        <div className='bg-blueish'>
             <Formik
                 // set initial values in the form, return empty string if null
                
@@ -42,77 +42,78 @@ export default function UserForm ({ handleClose, submitForm, user }) {
             >
               {/* {({ isSubmitting, handleSubmit }) => ( */}
               
-                <Form className="bg-white rounded px-8 pt-6 pb-8 mb-4">
+                <Form className=" rounded px-8 pt-6 pb-8 mb-4">
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
+                        <label className="block text-white text-sm font-bold mb-2" htmlFor="firstName">
                             First Name
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray leading-tight focus:outline-none focus:shadow-outline" 
                             id="firstName" 
                             type="text" 
                             placeholder="First Name"
                             name="firstName"
                         />
-                         <ErrorMessage name="firstName" component="div" className="text-red-500" />
+                         <ErrorMessage name="firstName" component="div" className="text-red" />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="middleName">
+                        <label className="block text-white text-sm font-bold mb-2" htmlFor="middleName">
                             Middle Name
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray leading-tight focus:outline-none focus:shadow-outline" 
                             id="middleName" 
                             type="text" 
                             placeholder="Middle Name"
                             name="middleName"
                         />
-                        <ErrorMessage name="middleName" component="div" className="text-red-500" />
+                        <ErrorMessage name="middleName" component="div" className="text-red" />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
+                        <label className="block text-white text-sm font-bold mb-2" htmlFor="lastName">
                             Last Name
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray leading-tight focus:outline-none focus:shadow-outline" 
                             id="lastName" 
                             type="text" 
                             placeholder="Last Name"
                             name="lastName"
                         />
-                        <ErrorMessage name="lastName" component="div" className="text-red-500" />
+                        <ErrorMessage name="lastName" component="div" className="text-red" />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                        <label className="block text-white text-sm font-bold mb-2" htmlFor="email">
                             Email
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray leading-tight focus:outline-none focus:shadow-outline" 
                             id="email" 
                             type="text" 
                             placeholder="Email"
                             name="email"
                         />
+                        <ErrorMessage name="email" component="div" className="text-red" />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phoneNumber">
+                        <label className="block text-white text-sm font-bold mb-2" htmlFor="phoneNumber">
                             Phone Number
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray leading-tight focus:outline-none focus:shadow-outline" 
                             id="phoneNumber" 
                             type="text" 
                             placeholder="Phone Number"
                             name="phoneNumber"
                         />
-                        <ErrorMessage name="phoneNumber" component="div" className="text-red-500" />
+                        <ErrorMessage name="phoneNumber" component="div" className="text-red" />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
+                        <label className="block text-white text-sm font-bold mb-2" htmlFor="address">
                             Address
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray leading-tight focus:outline-none focus:shadow-outline" 
                             id="address" 
                             type="text" 
                             placeholder="Address"
@@ -121,11 +122,11 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                         <ErrorMessage name="address" component="div" className="text-red-500" />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="adminNotes">
+                        <label className="block text-white text-sm font-bold mb-2" htmlFor="adminNotes">
                             Notes
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray leading-tight focus:outline-none focus:shadow-outline" 
                             id="adminNotes" 
                             type="text" 
                             placeholder="Notes"

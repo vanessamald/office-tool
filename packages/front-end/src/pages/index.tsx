@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Navigation from '../components/Navigation';
 import SearchBar from './search';
+import PageTitle from '../components/PageTitle';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,12 +16,12 @@ export default function Home() {
       <Head>
         <title>Atllas Takehome</title>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <link rel="manifest" href="/manifest.json" />
         <link rel='icon' href='/public/favicon.ico' />
+        <meta name="theme-color" content="#000" />
       </Head>
-      <main className={clsx('min-h-screen w-full h-full', inter.className)}>
-        <h1 className='uppercase px-4 py-10 text-2xl font-medium text-center'>
-          User Management
-        </h1>
+      <main className={clsx('min-h-screen w-full h-full text-white', inter.className)}>
+        <PageTitle title='User Management' />
         <div className=''>
           <SearchBar/>
         </div>

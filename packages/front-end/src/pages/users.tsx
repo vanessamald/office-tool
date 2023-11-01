@@ -7,18 +7,9 @@ import DisplayUsers from '../components/DisplayUsers';
 import { handleEdit, handleDelete } from '../utilities/api';
 import { sortingById, sortingByEmail, sortingByFirstName, sortingByLastName  } from '../utilities/sorting';
 import { useRouter } from 'next/router';
+import PageTitle from '../components/PageTitle';
 
 export default function AllUsers({  }) {
-    /*
-    const [isDropdownVisible, setDropdownVisible] = useState(false);
-
-    // Toggle the dropdown visibility
-    const toggleDropdown = () => {
-      setDropdownVisible(!isDropdownVisible);
-      console.log('TOGGLE BUTTON')
-    };
-    */
-
     const router = useRouter();
     // all users
     const [ users, setUsers ] = useState([]);
@@ -89,20 +80,22 @@ export default function AllUsers({  }) {
 
     return (
         <>
-        <div className='p-4 overflow-x-auto'>
+        
+        <div className='p-4 overflow-x-auto bg-blue'>
+        <PageTitle title='User Management'/>
             <table className='table-auto w-full'>
                 <thead>
                     <tr className='border-t'>
-                        <th className='p-2 text-left'>
-                            <button onClick={handleSortingById}>Id</button>
+                        <th className='p-2 text-left text-gray'>
+                            <button onClick={handleSortingById} className=''>Id</button>
                         </th>
-                        <th className='p-2 text-left'>
+                        <th className='p-2 text-left text-gray'>
                             <button onClick={handleSortingByFirstName}>First Name</button>
                         </th>
-                        <th className='p-2 text-left'>
+                        <th className='p-2 text-left text-gray'>
                             <button onClick={handleSortingByLastName}>Last Name</button>
                         </th>
-                        <th className='p-2 text-left'>
+                        <th className='p-2 text-left text-gray'>
                             <button onClick={handleSortingByEmail}>Email</button>
                         </th>
                     </tr>
