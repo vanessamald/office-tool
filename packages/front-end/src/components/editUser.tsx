@@ -1,9 +1,6 @@
-import clsx from 'clsx';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Form from './Form';
 import { useRouter } from 'next/router';
-import { submitUserForm } from '../utilities/api';
-import { fetchSingleUserData } from '../utilities/api';
 
 export default function EditForm ({ user, handleClose })  {
   // open/close modal
@@ -28,8 +25,6 @@ export default function EditForm ({ user, handleClose })  {
   // handle submit form
   const submitForm = async (values: UserFormData) => {
     
-    // prevent page from reloading
-    //event.preventDefault();
   const response = await fetch(`http://localhost:50000/users/update/${user.id}`, {
     method: "PUT",
     headers: {
@@ -43,9 +38,7 @@ export default function EditForm ({ user, handleClose })  {
         console.log(data);
         setStatus(data.message); 
         console.log(status);
-        // reset form
-        //resetForm();
-        router.push('/');
+      
       } else {
         // set error response
         const errorData = await response.json();

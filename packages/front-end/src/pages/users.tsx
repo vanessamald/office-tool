@@ -1,10 +1,7 @@
-import clsx from 'clsx';
 import { useState, useEffect } from 'react';
-import SearchBar from './search';
 import { fetchUserData } from '../utilities/api.js';
 import EditForm from '../components/editUser';
 import DisplayUsers from '../components/DisplayUsers';
-import { handleEdit, handleDelete } from '../utilities/api';
 import { sortingById, sortingByEmail, sortingByFirstName, sortingByLastName  } from '../utilities/sorting';
 import { useRouter } from 'next/router';
 import PageTitle from '../components/PageTitle';
@@ -26,16 +23,6 @@ export default function AllUsers({  }) {
         }
         fetchData();
     }, []);
-
-    const onDeleteSuccess = async (userId) => {
-        try {
-          await handleDelete(userId);
-          // Remove the user from the list
-          setUsers(users.filter((user) => user.id !== userId));
-        } catch (error) {
-          console.error('Failed to delete user:', error);
-        }
-      };
     
     // handle sorting from utilities
     const handleSortingByLastName = () => {
@@ -80,14 +67,14 @@ export default function AllUsers({  }) {
 
     return (
         <>
-        
-        <div className='p-4 overflow-x-auto bg-blue'>
+        <div className='overflow-x-auto bg-blue'>
         <PageTitle title='User Management'/>
+            <div className='p-10'>
             <table className='table-auto w-full'>
                 <thead>
                     <tr className='border-t'>
-                        <th className='p-2 text-left text-gray'>
-                            <button onClick={handleSortingById} className=''>Id</button>
+                        <th className='p-2 text-left text-gray sm:inline-block hidden'>
+                            <button onClick={handleSortingById} className='hover:text-gray'>Id</button>
                         </th>
                         <th className='p-2 text-left text-gray'>
                             <button onClick={handleSortingByFirstName}>First Name</button>
@@ -95,7 +82,7 @@ export default function AllUsers({  }) {
                         <th className='p-2 text-left text-gray'>
                             <button onClick={handleSortingByLastName}>Last Name</button>
                         </th>
-                        <th className='p-2 text-left text-gray'>
+                        <th className='p-2 text-left text-gray sm:inline-block hidden'>
                             <button onClick={handleSortingByEmail}>Email</button>
                         </th>
                     </tr>
@@ -104,6 +91,7 @@ export default function AllUsers({  }) {
                     <DisplayUsers user={user} key={user.id} handleEdit={handleEdit} />
                 ))}
             </table>
+            </div>
            {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null}
         </div>
     </>

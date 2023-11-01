@@ -31,11 +31,8 @@ const UsersRouter: IRoute = {
     ;
 
     router.route('/:id')
-    // Fetch all users
+    // fetch user by id
     .get(async (req, res) => {
-      // pro tip: if you're not seeing any users, make sure you seeded the database.
-      //          make sure you read the readme! :)
-
       const { id } = req.params;
 
       const user = await User.findOne({
@@ -152,56 +149,6 @@ const UsersRouter: IRoute = {
         console.error('Failed to delete user', error);
       }
     })
-
-    /*
-    router.route('/find')
-    // find user by name and email
-    .get(async(req, res)=> {
-      const { firstName, lastName, email } = req.body;
-
-      try {
-        const user = await User.findOne({
-          where: { firstName, lastName, email }
-        })
-        // if user not found send error message
-        if (!user) {
-          return res.status(404).json({
-            success: false,
-            message: 'User not found'
-          })
-        }
-        // success message
-        return res.status(201).json({
-          success: true,
-          message: 'User successfully found',
-          data: user
-        });
-      } catch (error) {
-        console.error('Failed to find user', error);
-        return res.status(500).json({
-          success: false,
-          message: 'Failed to find user'
-        })
-      }
-    })
-
-    router.route('/sort')
-    // sort table by column 
-    .get(async (req, res)=> {
-        return await User.findAll({
-          order: [
-            ['lastName', 'ASC']
-          ]
-        })
-        .then(users => {
-          res.json({
-            success: true,
-            message: '',
-            data: users
-          })
-        })
-        
-    })*/
     return router;
   },
 };

@@ -19,8 +19,7 @@ export default function Confirmation({ user, closeConfirmDialog }) {
             await handleDelete(user.id);
             setStatus('User has been successfully deleted');
             setConfirmed(true);
-            //router.push('/');
-            //onUserDelete(user.id);
+
         } catch (error) {
             setStatus(`Error: ${error.message}`);
             console.error(error);
@@ -41,7 +40,7 @@ export default function Confirmation({ user, closeConfirmDialog }) {
                 >
                     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                 </Transition.Child>
-                <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+                <div className="fixed inset-0 z-10 w-screen overflow-y-auto " aria-hidden="true">
                     <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                         <Transition.Child
                             as={Fragment}
@@ -67,8 +66,6 @@ export default function Confirmation({ user, closeConfirmDialog }) {
                                             <div className="mt-2">
                                                 <p className="text-sm text-gray-500">
                                                     {statusMessage}
-                                                    {/*Are you sure you want to delete the user? All of the data will be permanently
-                                                   removed. This action cannot be undone.*/}
                                                 </p>
                                             </div>
                                         </div>

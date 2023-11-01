@@ -1,5 +1,4 @@
-import clsx from 'clsx';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Form from '../components/Form';
 import { useRouter } from 'next/router';
 import { submitNewUserForm } from '../utilities/api';
@@ -47,10 +46,10 @@ export default function AddNewUser () {
 
     return (
         <> 
-            <div>
+            <div className=''>
             {showModal ? ( <Form submitForm={handleSubmit} user='' handleClose={handleClose} />  ) : null}
             
-            {status ? <p className='font-medium text-green-500 text-left p-6'>{status}</p> : <p className='font-medium text-red-500 text-left p-6'>{errorMessage}</p>}
+            {status ? <p className='font-medium text-green text-left p-6'>{status}</p> : <p className='font-medium text-red text-left p-6'>{errorMessage}</p>}
             </div>
             
         </>

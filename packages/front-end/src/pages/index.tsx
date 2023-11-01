@@ -1,8 +1,6 @@
 import clsx from 'clsx';
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Navigation from '../components/Navigation';
 import SearchBar from './search';
 import PageTitle from '../components/PageTitle';
