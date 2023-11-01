@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchUserData } from '../utilities/api.js';
+import { fetchUserData } from '../utilities/api';
 import DisplayUsers from '../components/DisplayUsers';
 import EditForm from '../components/editUser';
 
@@ -24,7 +24,6 @@ export default function SearchBar ({ }) {
 
     // filter users by search parameters
     const handleSearch = async () => {
-        console.log(searchUser);
 
         // split search parameters 
         const splitSearchUser = searchUser.toLowerCase().split(' ');
@@ -48,7 +47,6 @@ export default function SearchBar ({ }) {
             return userSearch;
         })
         setFilteredUsers(filtered);
-        console.log(filtered);
     }
 
     const handleEdit = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {

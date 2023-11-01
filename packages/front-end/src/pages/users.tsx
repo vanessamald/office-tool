@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchUserData } from '../utilities/api.js';
+import { fetchUserData } from '../utilities/api';
 import EditForm from '../components/editUser';
 import DisplayUsers from '../components/DisplayUsers';
 import { sortingById, sortingByEmail, sortingByFirstName, sortingByLastName  } from '../utilities/sorting';

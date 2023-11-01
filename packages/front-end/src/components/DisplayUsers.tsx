@@ -9,7 +9,7 @@ export default function DisplayUsers ({ user, handleEdit }) {
 
     // handle toggle dropdown
     const toggleDropdown = () => {
-        setDropdownVisible(!isDropdownVisible);
+        setDropdownVisible(!isDropdownVisible); 
     };
 
     // open confirmation window

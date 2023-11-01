@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Form from '../components/Form';
 import { useRouter } from 'next/router';
 import { submitNewUserForm } from '../utilities/api';
+import { UserFormData } from '../utilities/api';
 
 export default function AddNewUser () {
     // open/close modal
@@ -10,17 +11,6 @@ export default function AddNewUser () {
     // status and error message 
     const [ status, setStatus ] = useState('');
     const [ errorMessage, setErrorMessage ] = useState('');
-
-    
-    interface UserFormData {
-        firstName: string;
-        middleName?: string; // Optional field
-        lastName: string;
-        email: string;
-        phoneNumber?: string; // Optional field
-        address?: string; // Optional field
-        adminNotes?: string; // Optional field
-      }
     
     // handle submit form
     const handleSubmit = async (values: UserFormData) => {
