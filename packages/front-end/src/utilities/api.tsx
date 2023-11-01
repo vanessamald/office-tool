@@ -7,6 +7,7 @@ export interface UserFormData {
   phoneNumber?: string; // Optional field
   address?: string; // Optional field
   adminNotes?: string; // Optional field
+  registered: Date;
 }
 
 // fetch all users 

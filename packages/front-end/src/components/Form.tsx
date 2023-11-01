@@ -27,7 +27,8 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                     email: user.email || '',
                     phoneNumber: user.phoneNumber || '',
                     address: user.address || '',
-                    adminNotes: user.adminNotes || ''
+                    adminNotes: user.adminNotes || '',
+                    registered: user.registered || new Date() 
                 }}
 
                 validationSchema={validationSchema}

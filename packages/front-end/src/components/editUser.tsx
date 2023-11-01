@@ -16,6 +16,7 @@ export default function EditForm ({ user, handleClose })  {
   const handleSubmit = async (values: UserFormData) => {
     const result = await submitUserForm(user.id, values);
 
+    console.log(values);
     if (result.success) {
       setStatus(result.message);
     } else {
@@ -27,7 +28,6 @@ export default function EditForm ({ user, handleClose })  {
         <>
           <div className='fixed inset-0 flex items-center justify-center z-50'>
             <div className="bg-blueish p-8 w-full h-full">
-              
               <Form handleClose={handleClose} submitForm={handleSubmit} user={user}/>
               {status ? <p className='font-medium text-green text-left'>{status}</p> : <p className='font-medium text-red text-left'>{errorMessage}</p>}  
             </div> 
