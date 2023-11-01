@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-export default function UserForm ({ handleClose, submitForm, user }) {
+export default function UserForm ({ handleClose, submitForm, user, isNewUser }) {
     
     // form validation 
     const validationSchema = Yup.object().shape({
@@ -32,9 +32,13 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                 }}
 
                 validationSchema={validationSchema}
-                onSubmit={(values) => {
+                onSubmit={async (values, { resetForm }) => {
                     // Pass the form values to the submitForm function
-                    submitForm(values);
+                    await submitForm(values);
+                    // reset form for creating a new user
+                    if (isNewUser === true) {
+                        resetForm();
+                    }
                   }}
             >  
                 <Form className="rounded px-10 xl:px-20 pt-6 pb-8 mb-4 ">
@@ -43,7 +47,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             First Name
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded sm:w-50 w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded sm:w-50 w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" 
                             id="firstName" 
                             type="text" 
                             placeholder="First Name"
@@ -56,7 +60,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             Middle Name
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" 
                             id="middleName" 
                             type="text" 
                             placeholder="Middle Name"
@@ -69,7 +73,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             Last Name
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" 
                             id="lastName" 
                             type="text" 
                             placeholder="Last Name"
@@ -82,7 +86,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             Email
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gra-500 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" 
                             id="email" 
                             type="text" 
                             placeholder="Email"
@@ -95,7 +99,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             Phone Number
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" 
                             id="phoneNumber" 
                             type="text" 
                             placeholder="Phone Number"
@@ -108,7 +112,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             Address
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" 
                             id="address" 
                             type="text" 
                             placeholder="Address"
@@ -121,7 +125,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             Notes
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" 
                             id="adminNotes" 
                             type="text" 
                             placeholder="Notes"

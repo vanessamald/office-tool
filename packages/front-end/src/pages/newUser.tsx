@@ -3,6 +3,7 @@ import Form from '../components/Form';
 import { useRouter } from 'next/router';
 import { submitNewUserForm } from '../utilities/api';
 import { UserFormData } from '../utilities/api';
+import Status from '../components/Status';
 
 export default function AddNewUser () {
     // open/close modal
@@ -37,9 +38,11 @@ export default function AddNewUser () {
     return (
         <> 
             <div className=''>
-            {showModal ? ( <Form submitForm={handleSubmit} user='' handleClose={handleClose} />  ) : null}
+            {showModal ? ( <Form submitForm={handleSubmit} user='' handleClose={handleClose} isNewUser={true} />  ) : null}
             
-            {status ? <p className='font-medium text-green text-left p-6'>{status}</p> : <p className='font-medium text-red text-left p-6'>{errorMessage}</p>}
+           {/* {status || errorMessage ? <Status statusMessage={status || errorMessage} messageType={'success' || 'error'} /> : null}*/}
+
+            {status || errorMessage ? <Status statusMessage={status || errorMessage} messageType={status ? 'success' : 'error'}/> : null}
             </div>
             
         </>

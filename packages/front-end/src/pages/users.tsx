@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { fetchUserData } from '../utilities/api';
-import EditForm from '../components/EditUser';
+import EditForm from '../components/editUser';
 import DisplayUsers from '../components/DisplayUsers';
 import { sortingById, sortingByEmail, sortingByFirstName, sortingByLastName  } from '../utilities/sorting';
 import { useRouter } from 'next/router';
-import PageTitle from '../components/PageTitle';
 
 export default function AllUsers({  }) {
     const router = useRouter();

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchUserData } from '../utilities/api';
 import DisplayUsers from '../components/DisplayUsers';
-import EditUser from '../components/EditUser';
+import EditForm from '../components/editUser';;
 
 
 export default function SearchBar ({ }) {
@@ -108,7 +108,7 @@ export default function SearchBar ({ }) {
                     ))}
                 </table>
                 
-                {showModal ? ( <EditUser user={selectedUser} handleClose={handleClose} />  ) : null} 
+                {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null} 
             </div>
             : 'No users found' }
         </div>

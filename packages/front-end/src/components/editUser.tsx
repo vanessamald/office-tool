@@ -3,10 +3,11 @@ import Form from './Form';
 import { useRouter } from 'next/router';
 import { submitUserForm } from '../utilities/api';
 import { UserFormData } from '../utilities/api';
+import Status from './Status';
 
 export default function EditUser ({ user, handleClose })  {
-  // open/close modal
-  const [showModal, setShowModal] = useState(true);
+  const [isStatusOpen, setIsStatusOpen] = useState(false);
+  
   // status and error message 
   const [ status, setStatus ] = useState('');
   const [ errorMessage, setErrorMessage ] = useState('');
@@ -26,11 +27,13 @@ export default function EditUser ({ user, handleClose })  {
     
   return (
         <>
-          <div className='fixed inset-0 flex items-center justify-center z-50'>
+          <div className='fixed inset-0 flex items-center justify-center z-40'>
             <div className="bg-blueish p-8 w-full h-full">
-              <Form handleClose={handleClose} submitForm={handleSubmit} user={user}/>
-              {status ? <p className='font-medium text-green text-left'>{status}</p> : <p className='font-medium text-red text-left'>{errorMessage}</p>}  
-            </div> 
+            {isStatusOpen ? null : (
+              <Form handleClose={handleClose} submitForm={handleSubmit} user={user} isNewUser={false}/>
+            )}
+              {status || errorMessage ? <Status statusMessage={status || errorMessage} messageType={status ? 'success' : 'error'}/> : null}
+              </div> 
           </div>
         </>
     )

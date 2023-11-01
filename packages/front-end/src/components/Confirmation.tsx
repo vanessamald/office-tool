@@ -4,6 +4,7 @@ import { handleDelete } from '../utilities/api';
 import { useRouter } from 'next/router';
 import { UserFormData } from '../utilities/api';
 
+
 export default function Confirmation({ user, closeConfirmDialog }) {
     const router = useRouter();
     const [open, setOpen] = useState(true);
@@ -21,7 +22,7 @@ export default function Confirmation({ user, closeConfirmDialog }) {
             setStatus('User has been successfully deleted');
             setConfirmed(true);
             // take user to homepage
-            
+            //router.reload();
 
         } catch (error) {
             setStatus(`Error: ${error.message}`);
@@ -82,6 +83,8 @@ export default function Confirmation({ user, closeConfirmDialog }) {
                                         onClick={() => {
                                             closeConfirmDialog();
                                             setOpen(false);
+                                            // reload 
+                                            router.reload();
                                         }}
                                         ref={cancelButtonRef}
                                     >
