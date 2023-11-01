@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchUserData } from '../utilities/api';
-import EditForm from '../components/editUser';
+import EditForm from '../components/EditUser';
 import DisplayUsers from '../components/DisplayUsers';
 import { sortingById, sortingByEmail, sortingByFirstName, sortingByLastName  } from '../utilities/sorting';
 import { useRouter } from 'next/router';
@@ -69,20 +69,20 @@ export default function AllUsers({  }) {
     return (
         <>
         <div className='overflow-x-auto bg-blue'>
-            <div className='p-10'>
+            <div className='pl-10 pr-10'>
             <table className='table-auto w-full'>
                 <thead>
                     <tr className='border-t'>
-                        <th className='p-2 text-left text-black sm:inline-block hidden'>
+                        <th className='p-2 text-left text-sky-500 text-lg underline hover:text-sky-700 font-bold sm:inline-block hidden hover:text-gray'>
                             <button onClick={handleSortingById} className='hover:text-gray'>Id</button>
                         </th>
-                        <th className='p-2 text-left text-black'>
+                        <th className='p-2 text-left text-sky-500 text-lg underline hover:text-sky-700 font-bold'>
                             <button onClick={handleSortingByFirstName}>First Name</button>
                         </th>
-                        <th className='p-2 text-left text-black'>
+                        <th className='p-2 text-left text-sky-500 text-lg underline hover:text-sky-700 font-bold'>
                             <button onClick={handleSortingByLastName}>Last Name</button>
                         </th>
-                        <th className='p-2 text-left text-black sm:inline-block hidden'>
+                        <th className='p-2 text-left text-sky-500 text-lg underline hover:text-sky-700 font-bold sm:inline-block hidden'>
                             <button onClick={handleSortingByEmail}>Email</button>
                         </th>
                     </tr>

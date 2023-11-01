@@ -4,7 +4,6 @@ import SearchBar from '../pages/search';
 import AllUsers from '../pages/users';
 import AddNewUser from '../pages/newUser';
 
-
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }

@@ -121,7 +121,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             Notes
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gra-500 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" 
                             id="adminNotes" 
                             type="text" 
                             placeholder="Notes"

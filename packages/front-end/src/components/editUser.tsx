@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { submitUserForm } from '../utilities/api';
 import { UserFormData } from '../utilities/api';
 
-export default function EditForm ({ user, handleClose })  {
+export default function EditUser ({ user, handleClose })  {
   // open/close modal
   const [showModal, setShowModal] = useState(true);
   // status and error message 
