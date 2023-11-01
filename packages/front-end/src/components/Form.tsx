@@ -37,13 +37,13 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                     submitForm(values);
                   }}
             >  
-                <Form className=" rounded px-8 pt-6 pb-8 mb-4">
+                <Form className="rounded px-10 xl:px-20 pt-6 pb-8 mb-4 ">
                     <div className="mb-4">
                         <label className="block text-white text-sm font-bold mb-2" htmlFor="firstName">
                             First Name
                         </label>
                         <Field 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" 
+                            className="shadow appearance-none border rounded sm:w-50 w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" 
                             id="firstName" 
                             type="text" 
                             placeholder="First Name"
@@ -126,6 +126,7 @@ export default function UserForm ({ handleClose, submitForm, user }) {
                             type="text" 
                             placeholder="Notes"
                             name="adminNotes"
+                            component="textarea" rows="4"
                         />
                         <ErrorMessage name="adminNotes" component="div" className="text-red-500" />
                     </div>

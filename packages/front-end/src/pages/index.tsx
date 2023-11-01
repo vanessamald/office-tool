@@ -19,10 +19,7 @@ export default function Home() {
         <meta name="theme-color" content="#000" />
       </Head>
       <main className={clsx('min-h-screen w-full h-full text-white', inter.className)}>
-        <PageTitle title='User Management' />
-        <div className=''>
-          <SearchBar/>
-        </div>
+        <PageTitle title='User Management'/>
         <div className='h-screen'>
           <Navigation/>
         </div>

@@ -3,6 +3,7 @@ import { fetchUserData } from '../utilities/api';
 import DisplayUsers from '../components/DisplayUsers';
 import EditForm from '../components/editUser';
 
+
 export default function SearchBar ({ }) {
     const [ users, setUsers ] = useState([]);
     const [ searchUser, setSearchUser ] = useState('');
@@ -63,6 +64,26 @@ export default function SearchBar ({ }) {
     setShowModal(false);
     }
 
+    // handle scrolling in div
+      // Variables to control endless scrolling
+      /*
+  const resultsContainerRef = React.createRef();
+  const resultsPageSize = 10; // Number of results to load per page
+  const [page, setPage] = useState(1);
+
+      // Handle scrolling to load more results
+  const handleScroll = () => {
+    const container = resultsContainerRef.current;
+    if (
+      container &&
+      container.scrollTop + container.clientHeight >= container.scrollHeight - 100
+    ) {
+      // Load more results when near the bottom
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+  */
+
     return (
         <>
         <div className=''>
@@ -92,7 +113,7 @@ export default function SearchBar ({ }) {
             </form>
             </div>
             {filteredUsers.length > 0 ?
-            <div className='p-10'>
+            <div className='p-10 z-50 bg-transparent w-full'>
                 <table className='table-auto w-full'>
                     <thead>
                         <tr className='border-t'>

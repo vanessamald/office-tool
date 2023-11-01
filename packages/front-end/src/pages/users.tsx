@@ -23,6 +23,7 @@ export default function AllUsers({  }) {
         }
         fetchData();
     }, []);
+
     
     // handle sorting from utilities
     const handleSortingByLastName = () => {
@@ -68,21 +69,20 @@ export default function AllUsers({  }) {
     return (
         <>
         <div className='overflow-x-auto bg-blue'>
-        <PageTitle title='User Management'/>
             <div className='p-10'>
             <table className='table-auto w-full'>
                 <thead>
                     <tr className='border-t'>
-                        <th className='p-2 text-left text-gray sm:inline-block hidden'>
+                        <th className='p-2 text-left text-black sm:inline-block hidden'>
                             <button onClick={handleSortingById} className='hover:text-gray'>Id</button>
                         </th>
-                        <th className='p-2 text-left text-gray'>
+                        <th className='p-2 text-left text-black'>
                             <button onClick={handleSortingByFirstName}>First Name</button>
                         </th>
-                        <th className='p-2 text-left text-gray'>
+                        <th className='p-2 text-left text-black'>
                             <button onClick={handleSortingByLastName}>Last Name</button>
                         </th>
-                        <th className='p-2 text-left text-gray sm:inline-block hidden'>
+                        <th className='p-2 text-left text-black sm:inline-block hidden'>
                             <button onClick={handleSortingByEmail}>Email</button>
                         </th>
                     </tr>

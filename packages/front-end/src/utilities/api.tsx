@@ -1,5 +1,5 @@
 export interface UserFormData {
-  id?: number; 
+  id: number; 
   firstName: string;
   middleName?: string; // Optional field
   lastName: string;
