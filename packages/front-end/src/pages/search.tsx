@@ -3,7 +3,6 @@ import { fetchUserData } from '../utilities/api';
 import DisplayUsers from '../components/DisplayUsers';
 import EditForm from '../components/editUser';;
 
-
 export default function SearchBar ({ }) {
     const [ users, setUsers ] = useState([]);
     const [ searchUser, setSearchUser ] = useState('');
@@ -24,7 +23,8 @@ export default function SearchBar ({ }) {
         }, []);
 
     // filter users by search parameters
-    const handleSearch = async () => {
+    const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
         // split search parameters 
         const splitSearchUser = searchUser.toLowerCase().split(' ');
@@ -68,7 +68,7 @@ export default function SearchBar ({ }) {
         <>
         <div className=''>
             <div className='p-4 pb-6'>
-            <form className=''>   
+            <form className=''onSubmit={handleSearch}>   
                 <label 
                     htmlFor="default-search" 
                     className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -88,11 +88,11 @@ export default function SearchBar ({ }) {
                         onChange={(e)=> setSearchUser(e.target.value)}
                         required
                     />
-                    <button onClick={handleSearch} type="button" className="bg-blueish text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                    <button type="submit" className="bg-blueish text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                 </div>
             </form>
             </div>
-            {filteredUsers.length > 0 ?
+            {filteredUsers.length > 0 ? (
             <div className='z-50 bg-transparent w-full pl-10 pr-10'>
                 <table className='table-auto w-full'>
                     <thead>
@@ -110,7 +110,7 @@ export default function SearchBar ({ }) {
                 
                 {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null} 
             </div>
-            : 'No users found' }
+            ) : ( <div className='text-black text-center'>No users found</div>  )}
         </div>
         </>
     )

@@ -1,19 +1,13 @@
 import { Tab } from '@headlessui/react'
-import { useRouter } from 'next/router';
 import SearchBar from '../pages/search';
 import AllUsers from '../pages/users';
 import AddNewUser from '../pages/newUser';
 
-function classNames(...classes) {
+function classNames(...classes:any) {
     return classes.filter(Boolean).join(' ')
   }
 
 export default function Navigation () {
-    const router = useRouter();
-
-    const handleNavigation = (path) => {
-        router.push(path);
-      };
     
   return (
     <>
@@ -65,13 +59,13 @@ export default function Navigation () {
             'rounded-xl bg-white p-3',
             'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
           )}>
-            <AddNewUser />
+            <AddNewUser/>
           </Tab.Panel>
           <Tab.Panel className={classNames(
             'rounded-xl bg-white p-3',
             'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
           )}>
-            <AllUsers/>
+              <AllUsers/>
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

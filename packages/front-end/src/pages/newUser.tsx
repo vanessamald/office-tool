@@ -21,8 +21,6 @@ export default function AddNewUser () {
 
         if (result.success) {
             setStatus(result.message);
-            // reset form
-
         } else {
             setErrorMessage(result.message);
         }
@@ -39,12 +37,9 @@ export default function AddNewUser () {
         <> 
             <div className=''>
             {showModal ? ( <Form submitForm={handleSubmit} user='' handleClose={handleClose} isNewUser={true} />  ) : null}
-            
-           {/* {status || errorMessage ? <Status statusMessage={status || errorMessage} messageType={'success' || 'error'} /> : null}*/}
 
             {status || errorMessage ? <Status statusMessage={status || errorMessage} messageType={status ? 'success' : 'error'}/> : null}
             </div>
-            
         </>
     )
 }

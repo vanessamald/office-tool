@@ -3,10 +3,10 @@ import { fetchUserData } from '../utilities/api';
 import EditForm from '../components/editUser';
 import DisplayUsers from '../components/DisplayUsers';
 import { sortingById, sortingByEmail, sortingByFirstName, sortingByLastName  } from '../utilities/sorting';
-import { useRouter } from 'next/router';
 
-export default function AllUsers({  }) {
-    const router = useRouter();
+export default function AllUsers() {
+    const [isOnScreen, setIsOnScreen] = useState(false);
+
     // all users
     const [ users, setUsers ] = useState([]);
     // open/close modal
@@ -14,16 +14,6 @@ export default function AllUsers({  }) {
     // selected user to edit
     const [ selectedUser, setSelectedUser ] = useState(null);
 
-    // fetch user data from utilities 
-    useEffect(() => {
-        async function fetchData() {
-            const data = await fetchUserData();
-            setUsers(data);
-        }
-        fetchData();
-    }, []);
-
-    
     // handle sorting from utilities
     const handleSortingByLastName = () => {
         sortingByLastName(users, setUsers);
@@ -45,10 +35,28 @@ export default function AllUsers({  }) {
     useEffect(() => {
         async function fetchData() {
             const data = await fetchUserData();
+            setIsOnScreen(true);
             setUsers(data);
         }
         fetchData();
+    }, []); 
+
+    /*
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const data = await fetchUserData();
+                setUsers(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                setIsOnScreen(false); // Set isOnScreen to false when data fetching is complete (regardless of success or failure)
+            }
+        }
+
+        fetchData();
     }, []);
+    */
 
     // handle edit form
     const handleEdit = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
@@ -69,6 +77,7 @@ export default function AllUsers({  }) {
         <>
         <div className='overflow-x-auto bg-blue'>
             <div className='pl-10 pr-10'>
+            
             <table className='table-auto w-full'>
                 <thead>
                     <tr className='border-t'>
@@ -87,12 +96,14 @@ export default function AllUsers({  }) {
                     </tr>
                 </thead>
                 {users.map((user)=> (
-                    <DisplayUsers user={user} key={user.id} handleEdit={handleEdit} />
+                    <DisplayUsers user={user} key={user.id} handleEdit={handleEdit}  />
                 ))}
             </table>
+            
             </div>
            {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null}
         </div>
+        
     </>
   )
 }

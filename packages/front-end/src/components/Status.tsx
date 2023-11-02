@@ -13,7 +13,6 @@ export default function Status({ statusMessage, messageType }) {
     const handleGoHome = () => {
       // close status page and navigate to homepage
       setOpen(false);
-      console.log('Navigating to homepage...');
       router.reload();
     };
 

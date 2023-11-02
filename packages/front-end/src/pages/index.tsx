@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
 import Navigation from '../components/Navigation';
-import SearchBar from './search';
 import PageTitle from '../components/PageTitle';
 
 const inter = Inter({ subsets: ['latin'] });
