@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Confirmation from "./Confirmation";
 
 export default function DisplayUsers ({ user, handleEdit  }) {
@@ -23,26 +23,8 @@ export default function DisplayUsers ({ user, handleEdit  }) {
         setConfirmationWindow(false);
     };
 
- 
-
-    /*
-    const tbodyRef = useRef();
-    const [ref, inView] = useInView({
-        triggerOnce: true
-    });
-
-
-    useEffect(() => {
-        if (inView) {
-          fetchData(); // Call the fetchData function passed as a prop
-        }
-      }, [inView, fetchData]);
-*/
-
     return (
-        <>
-        
-           
+        <> 
         <tbody key={user.id}>
             <tr>
                 <td className='p-2 text-black sm:inline-block hidden'>{user.id}</td>
@@ -95,7 +77,5 @@ export default function DisplayUsers ({ user, handleEdit  }) {
                 </td>          
             </tr>
         </tbody> 
-       
-       
      </>
 )}

@@ -107,7 +107,6 @@ export default function SearchBar ({ }) {
                         <DisplayUsers handleEdit={handleEdit} user={user} key={user.id}/>           
                     ))}
                 </table>
-                
                 {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null} 
             </div>
             ) : ( <div className='text-black text-center'>No users found</div>  )}

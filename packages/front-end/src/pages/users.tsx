@@ -41,23 +41,6 @@ export default function AllUsers() {
         fetchData();
     }, []); 
 
-    /*
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const data = await fetchUserData();
-                setUsers(data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            } finally {
-                setIsOnScreen(false); // Set isOnScreen to false when data fetching is complete (regardless of success or failure)
-            }
-        }
-
-        fetchData();
-    }, []);
-    */
-
     // handle edit form
     const handleEdit = async (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
         // Find the user with the given ID
@@ -99,11 +82,9 @@ export default function AllUsers() {
                     <DisplayUsers user={user} key={user.id} handleEdit={handleEdit}  />
                 ))}
             </table>
-            
             </div>
            {showModal ? ( <EditForm user={selectedUser} handleClose={handleClose} />  ) : null}
         </div>
-        
     </>
   )
 }
